@@ -1,0 +1,30 @@
+{#- Skeleton placeholders. Styles: assets/css/skeleton.css. Behaviour: assets/scripts/skeleton.js.
+
+    {% import "elements/skeleton.html" as skeleton %}
+    <div v-if="loading">{{ skeleton.lines(3) }}</div>
+-#}
+
+{% macro lines(count=3) -%}
+  {% for _ in range(count) %}<span class="skeleton skeleton-line"></span>{% endfor %}
+{%- endmacro %}
+
+{% macro card(lines_count=3) -%}
+  <div class="card" aria-hidden="true">
+    <span class="skeleton skeleton-title"></span>
+    {{ lines(lines_count) }}
+  </div>
+{%- endmacro %}
+
+{% macro block(height="9rem") -%}
+  <span class="skeleton skeleton-block" style="height: {{ height }}"></span>
+{%- endmacro %}
+
+{#- Default page skeleton. Override per page with {% block page_skeleton %}. -#}
+{% macro page() -%}
+  <span class="skeleton skeleton-title"></span>
+  {{ lines(2) }}
+  <div class="grid" style="margin-top: 1.5rem">
+    {{ card() }}
+    {{ card() }}
+  </div>
+{%- endmacro %}

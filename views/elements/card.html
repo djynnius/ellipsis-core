@@ -1,0 +1,11 @@
+{#- Reusable card.
+
+    {% from "elements/card.html" import card %}
+    {% call card("Title") %}body{% endcall %}
+-#}
+{% macro card(title=None) -%}
+  <section class="card">
+    {% if title %}<h2>{{ title }}</h2>{% endif %}
+    {{ caller() }}
+  </section>
+{%- endmacro %}

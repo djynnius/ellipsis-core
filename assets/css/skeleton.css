@@ -1,0 +1,99 @@
+/* Skeleton placeholders. Pairs with assets/scripts/skeleton.js. */
+
+:root {
+  --skeleton-base: #e4e7ec;
+  --skeleton-shine: #f3f5f8;
+  --skeleton-radius: 6px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --skeleton-base: #2a2f3a;
+    --skeleton-shine: #383e4c;
+  }
+}
+
+/* Any element (including <img>) wearing .skeleton becomes a shimmering block. */
+.skeleton {
+  background: linear-gradient(90deg, var(--skeleton-base) 25%, var(--skeleton-shine) 37%, var(--skeleton-base) 63%)
+    0 0 / 400% 100%;
+  animation: skeleton-shimmer 1.4s ease infinite;
+  border-color: transparent !important;
+  border-radius: var(--skeleton-radius);
+  box-shadow: none !important;
+  color: transparent !important;
+  cursor: progress;
+  pointer-events: none;
+  user-select: none;
+}
+
+.skeleton > * {
+  visibility: hidden;
+}
+
+img.skeleton {
+  min-height: 1.5rem;
+}
+
+/* An image that failed to load: a quiet static block instead of a broken icon. */
+.skeleton-failed {
+  background: var(--skeleton-base);
+  border-radius: var(--skeleton-radius);
+  color: transparent;
+}
+
+/* Ready-made shapes, used by views/elements/skeleton.html. */
+.skeleton-line {
+  display: block;
+  height: 0.9em;
+  margin: 0.55em 0;
+}
+
+.skeleton-line:last-child {
+  width: 60%;
+}
+
+.skeleton-title {
+  display: block;
+  height: 1.6em;
+  margin-bottom: 1em;
+  width: 40%;
+}
+
+.skeleton-block {
+  display: block;
+  height: 9rem;
+}
+
+/* Page skeleton: shown while a page loads its data, or while the next page is on its way. */
+#page-skeleton {
+  display: none;
+}
+
+[data-page-loading] #page-skeleton {
+  display: block;
+}
+
+[data-page-loading] [data-page-content] {
+  display: none;
+}
+
+/* Vue: keep un-mounted templates out of sight. */
+[v-cloak] {
+  display: none;
+}
+
+@keyframes skeleton-shimmer {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
+}

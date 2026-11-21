@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% from "elements/card.html" import card %}
+
+{% block content %}
+<h1>{{ app_name }}</h1>
+<p class="muted">Flask, SQLAlchemy, Alembic, Redis, Jinja2 and Vue, wired together. Replace this page with your own.</p>
+
+<div class="grid" id="app" v-cloak>
+  {% call card("Status") %}
+    {# Loaded with fetch: skeleton lines stand in until the answer arrives. #}
+    <div v-if="loading">{{ skeleton.lines(2) }}</div>
+    <p v-else-if="error" class="bad">Could not load status: [[ error ]]</p>
+    <ul v-else class="status-list">
+      <li><span>Database</span> <strong :class="status.database ? 'ok' : 'bad'">[[ status.database ? "connected" : "unreachable" ]]</strong></li>
+      <li><span>Redis</span> <strong :class="redisClass">[[ redisLabel ]]</strong></li>
+    </ul>
+  {% endcall %}
+
+  {% call card("Images") %}
+    {# data-skeleton: shimmers until the image has loaded. #}
+    <img data-skeleton src="{{ url_for('static', filename='images/elipsis.svg') }}" width="320" height="180" alt="elipsis">
+  {% endcall %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  Elipsis.createApp({
+    data: function () {
+      return { loading: true, error: null, status: {} };
+    },
+    computed: {
+      redisLabel: function () {
+        if (this.status.redis === null) return "disabled";
+        return this.status.redis ? "connected" : "unreachable";
+      },
+      redisClass: function () {
+        if (this.status.redis === null) return "muted";
+        return this.status.redis ? "ok" : "bad";
+      },
+    },
+    mounted: function () {
+      var view = this;
+      Elipsis.getJSON("{{ url_for('home.status') }}")
+        .then(function (status) { view.status = status; })
+        .catch(function (error) { view.error = error.message; })
+        .finally(function () { view.loading = false; });
+    },
+  }).mount("#app");
+</script>
+{% endblock %}

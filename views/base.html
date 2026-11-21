@@ -1,0 +1,37 @@
+{#- The boilerplate most pages extend. A page that looks nothing like this
+    (login, landing) can be a standalone template instead. -#}
+{% import "elements/skeleton.html" as skeleton %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ app_name }}{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+  {# Without JavaScript nothing would ever clear the page skeleton. #}
+  <noscript><style>#page-skeleton { display: none !important; } [data-page-content] { display: block !important; }</style></noscript>
+  {% block head %}{% endblock %}
+</head>
+{# A page that loads its own data adds data-page-loading here and calls Skeleton.pageReady(). #}
+<body {% block body_attrs %}{% endblock %}>
+  {% include "elements/navbar.html" %}
+
+  <div class="container">
+    <div id="page-skeleton" aria-hidden="true">
+      {% block page_skeleton %}{{ skeleton.page() }}{% endblock %}
+    </div>
+
+    <main data-page-content>
+      {% include "elements/flash.html" %}
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+
+  <script src="{{ url_for('static', filename='scripts/vendor/vue.global.prod.js') }}"></script>
+  {# socketio: <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script> #}
+  <script src="{{ url_for('static', filename='scripts/skeleton.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/app.js') }}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

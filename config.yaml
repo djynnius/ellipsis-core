@@ -1,0 +1,33 @@
+# elipsis configuration. Loaded by controllers/config.py and used by app.py.
+#
+# ${VAR} and ${VAR:default} are replaced from the environment (and from .env),
+# so real secrets stay in .env and out of git.
+
+app:
+  name: elipsis
+  debug: ${APP_DEBUG:false}
+  host: ${APP_HOST:127.0.0.1}
+  port: ${APP_PORT:5000}
+  secret_key: ${SECRET_KEY:change-me}
+
+database:
+  # Relative sqlite paths are resolved from the project root.
+  url: ${DATABASE_URL:sqlite:///databases/app.db}
+  echo: false
+
+redis:
+  # When disabled: sessions fall back to signed cookies and the cache to
+  # process memory. Enable it before running more than one app instance.
+  enabled: ${REDIS_ENABLED:false}
+  url: ${REDIS_URL:redis://localhost:6379/0}
+  key_prefix: "elipsis:"
+  default_ttl: 300          # seconds, for controllers.cache
+  session_lifetime: 86400   # seconds
+
+storage:
+  uploads: uploads
+  downloads: downloads
+  max_upload_mb: 16
+
+# socketio:
+#   message_queue: ${REDIS_URL:redis://localhost:6379/0}   # needed when load balanced

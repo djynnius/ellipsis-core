@@ -1,0 +1,119 @@
+/* Base styles for views/base.html. Replace freely; skeleton.css is separate. */
+
+:root {
+  --bg: #f7f8fa;
+  --surface: #ffffff;
+  --text: #1c2030;
+  --muted: #667085;
+  --border: #e2e5eb;
+  --accent: #4f46e5;
+  --ok: #16a34a;
+  --bad: #dc2626;
+  --radius: 10px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14161c;
+    --surface: #1d2029;
+    --text: #e8eaf0;
+    --muted: #9aa3b5;
+    --border: #2d313d;
+    --accent: #8b87ff;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  margin: 0;
+}
+
+a {
+  color: var(--accent);
+}
+
+img {
+  height: auto;
+  max-width: 100%;
+}
+
+.navbar {
+  align-items: center;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 1.5rem;
+  padding: 0.75rem 1.5rem;
+}
+
+.navbar .brand {
+  color: var(--text);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 60rem;
+  padding: 2rem 1.5rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+}
+
+.card h2 {
+  font-size: 1.05rem;
+  margin: 0 0 0.75rem;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.flash {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+}
+
+.status-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.status-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.3rem 0;
+}
+
+.ok {
+  color: var(--ok);
+}
+
+.bad {
+  color: var(--bad);
+}
