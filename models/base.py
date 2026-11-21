@@ -1,4 +1,4 @@
-"""Declarative base and the standard columns every elipsis table carries.
+"""Declarative base and the standard columns every ellipsis table carries.
 
     class Business(StandardColumns, Base):
         __tablename__ = "businesses"
@@ -21,7 +21,7 @@ from datetime import datetime, timezone
 from sqlalchemy import DateTime, Integer, String
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
-_actor = ContextVar("elipsis_actor", default=None)
+_actor = ContextVar("ellipsis_actor", default=None)
 
 
 def set_actor(user_id):

@@ -18,14 +18,14 @@
 
   {% call card("Images") %}
     {# data-skeleton: shimmers until the image has loaded. #}
-    <img data-skeleton src="{{ url_for('static', filename='images/elipsis.svg') }}" width="320" height="180" alt="elipsis">
+    <img data-skeleton src="{{ url_for('static', filename='images/ellipsis.svg') }}" width="320" height="180" alt="ellipsis">
   {% endcall %}
 </div>
 {% endblock %}
 
 {% block scripts %}
 <script>
-  Elipsis.createApp({
+  Ellipsis.createApp({
     data: function () {
       return { loading: true, error: null, status: {} };
     },
@@ -41,7 +41,7 @@
     },
     mounted: function () {
       var view = this;
-      Elipsis.getJSON("{{ url_for('home.status') }}")
+      Ellipsis.getJSON("{{ url_for('home.status') }}")
         .then(function (status) { view.status = status; })
         .catch(function (error) { view.error = error.message; })
         .finally(function () { view.loading = false; });

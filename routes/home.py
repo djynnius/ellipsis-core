@@ -14,7 +14,7 @@ def index():
 
 @blueprint.get("/api/status")
 def status():
-    """Health of the pieces elipsis wires together. The home page loads this with fetch."""
+    """Health of the pieces ellipsis wires together. The home page loads this with fetch."""
     try:
         db_session.execute(text("SELECT 1"))
         database = True

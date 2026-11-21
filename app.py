@@ -1,4 +1,4 @@
-"""elipsis base app. Run with `python app.py` or `flask run`."""
+"""ellipsis base app. Run with `python app.py` or `flask run`."""
 
 from flask import Flask, render_template, session
 
@@ -18,7 +18,7 @@ def create_app(config_overrides=None):
     config = load_config(overrides=config_overrides)
 
     app = Flask(__name__, template_folder="views", static_folder="assets", static_url_path="/assets")
-    app.config["ELIPSIS"] = config
+    app.config["ELLIPSIS"] = config
     app.config["SECRET_KEY"] = config["app"]["secret_key"]
     app.config["DEBUG"] = bool(config["app"].get("debug", False))
 
@@ -54,6 +54,6 @@ def create_app(config_overrides=None):
 
 if __name__ == "__main__":
     app = create_app()
-    settings = app.config["ELIPSIS"]["app"]
+    settings = app.config["ELLIPSIS"]["app"]
     app.run(host=settings.get("host", "127.0.0.1"), port=int(settings.get("port", 5000)))
     # socketio.run(app, host=..., port=...)   # replaces app.run when Socket.IO is on

@@ -27,7 +27,7 @@ def build_engine(database_config):
 
 
 def init_db(app):
-    engine = build_engine(app.config["ELIPSIS"]["database"])
+    engine = build_engine(app.config["ELLIPSIS"]["database"])
     db_session.remove()
     db_session.configure(bind=engine)
     app.extensions["db_engine"] = engine

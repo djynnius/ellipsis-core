@@ -1,7 +1,7 @@
 /*
  * Shared front-end entry point. Loaded on every page after Vue and skeleton.js.
  *
- * Elipsis.createApp(options).mount("#app") is Vue.createApp with two things set:
+ * Ellipsis.createApp(options).mount("#app") is Vue.createApp with two things set:
  *   - delimiters are [[ ]] so they do not clash with Jinja's {{ }}
  *   - v-skeleton is registered
  */
@@ -23,5 +23,5 @@
     });
   }
 
-  global.Elipsis = { createApp: createApp, getJSON: getJSON };
+  global.Ellipsis = { createApp: createApp, getJSON: getJSON };
 })(window);

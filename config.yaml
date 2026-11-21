@@ -1,10 +1,10 @@
-# elipsis configuration. Loaded by controllers/config.py and used by app.py.
+# ellipsis configuration. Loaded by controllers/config.py and used by app.py.
 #
 # ${VAR} and ${VAR:default} are replaced from the environment (and from .env),
 # so real secrets stay in .env and out of git.
 
 app:
-  name: elipsis
+  name: ellipsis
   debug: ${APP_DEBUG:false}
   host: ${APP_HOST:127.0.0.1}
   port: ${APP_PORT:5000}
@@ -20,7 +20,7 @@ redis:
   # process memory. Enable it before running more than one app instance.
   enabled: ${REDIS_ENABLED:false}
   url: ${REDIS_URL:redis://localhost:6379/0}
-  key_prefix: "elipsis:"
+  key_prefix: "ellipsis:"
   default_ttl: 300          # seconds, for controllers.cache
   session_lifetime: 86400   # seconds
 

@@ -45,7 +45,7 @@ def _merge(base, overrides):
 def load_config(path=None, overrides=None):
     """Return the config as a dict. `overrides` is deep-merged on top (used by tests)."""
     load_dotenv(BASE_DIR / ".env")
-    path = Path(path or os.environ.get("ELIPSIS_CONFIG") or BASE_DIR / "config.yaml")
+    path = Path(path or os.environ.get("ELLIPSIS_CONFIG") or BASE_DIR / "config.yaml")
     with open(path, encoding="utf-8") as handle:
         config = _expand(yaml.safe_load(handle) or {})
     return _merge(config, overrides or {})

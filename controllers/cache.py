@@ -30,7 +30,7 @@ class Cache:
         self._memory = {}
 
     def init_app(self, app):
-        settings = app.config["ELIPSIS"].get("redis", {})
+        settings = app.config["ELLIPSIS"].get("redis", {})
         self.prefix = settings.get("key_prefix", "")
         self.default_ttl = int(settings.get("default_ttl", 300))
         self._memory = {}

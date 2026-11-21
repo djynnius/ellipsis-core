@@ -1,6 +1,6 @@
-# elipsis architecture
+# ellipsis architecture
 
-Everything needed to rebuild the elipsis scaffold with no access to its repository. Build the files in the order of the sections below, then run the checks at the end.
+Everything needed to rebuild the ellipsis scaffold with no access to its repository. Build the files in the order of the sections below, then run the checks at the end.
 
 ## Contents
 
@@ -111,13 +111,13 @@ Shared code lives here and nowhere else.
 
 **config.py**
 - `BASE_DIR`: the project root (`Path(__file__).resolve().parent.parent`).
-- `load_config(path=None, overrides=None) -> dict`: loads `BASE_DIR/.env` with python-dotenv, reads the YAML at `path`, else `$ELIPSIS_CONFIG`, else `BASE_DIR/config.yaml`, expands slots recursively, then deep-merges `overrides` on top (tests use this).
+- `load_config(path=None, overrides=None) -> dict`: loads `BASE_DIR/.env` with python-dotenv, reads the YAML at `path`, else `$ELLIPSIS_CONFIG`, else `BASE_DIR/config.yaml`, expands slots recursively, then deep-merges `overrides` on top (tests use this).
 - Slot rules: a missing variable with no default raises `KeyError` naming it. When the whole value is a single slot, the result is passed through `yaml.safe_load` so `"false"` becomes `False` and `"5000"` becomes `5000`; a slot inside a longer string stays text.
 
 **database.py**
 - `db_session = scoped_session(sessionmaker(autoflush=False, expire_on_commit=False))`, module level, imported everywhere.
 - `build_engine(database_config)`: `create_engine` with `pool_pre_ping=True`. A relative SQLite file path is resolved against `BASE_DIR` so the app, Alembic and tests agree on the file.
-- `init_db(app)`: builds the engine from `app.config["ELIPSIS"]["database"]`, calls `db_session.remove()` then `db_session.configure(bind=engine)`, stores the engine in `app.extensions["db_engine"]`, and registers a `teardown_appcontext` that rolls back on exception and always calls `db_session.remove()`.
+- `init_db(app)`: builds the engine from `app.config["ELLIPSIS"]["database"]`, calls `db_session.remove()` then `db_session.configure(bind=engine)`, stores the engine in `app.extensions["db_engine"]`, and registers a `teardown_appcontext` that rolls back on exception and always calls `db_session.remove()`.
 
 **cache.py**
 - `class Cache` with `init_app(app)`, `get(key, default=None)`, `set(key, value, ttl=None)`, `delete(key)`, `ping()`. Values are JSON. Keys get `redis.key_prefix`. `ttl=None` means `redis.default_ttl`.
@@ -137,7 +137,7 @@ from datetime import datetime, timezone
 from sqlalchemy import DateTime, Integer, String
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
-_actor = ContextVar("elipsis_actor", default=None)
+_actor = ContextVar("ellipsis_actor", default=None)
 
 
 def set_actor(user_id):
@@ -198,7 +198,7 @@ A route named `<name>` is always `routes/<name>.py` with templates in `views/<na
 
 1. `config = load_config(overrides=config_overrides)`
 2. `Flask(__name__, template_folder="views", static_folder="assets", static_url_path="/assets")`
-3. `app.config`: `ELIPSIS` (the whole config dict), `SECRET_KEY`, `DEBUG`, `UPLOAD_FOLDER` and `DOWNLOAD_FOLDER` (absolute, under `BASE_DIR`), `MAX_CONTENT_LENGTH`.
+3. `app.config`: `ELLIPSIS` (the whole config dict), `SECRET_KEY`, `DEBUG`, `UPLOAD_FOLDER` and `DOWNLOAD_FOLDER` (absolute, under `BASE_DIR`), `MAX_CONTENT_LENGTH`.
 4. `init_db(app)`, `cache.init_app(app)`, `register_blueprints(app)`.
 5. `before_request`: `set_actor(session.get("user_id"))`.
 6. Context processor providing `app_name`.
@@ -250,7 +250,7 @@ All asset URLs use `url_for('static', filename=...)`.
 
 **scripts/vendor/vue.global.prod.js**: Vue 3 global build, vendored (it includes the template compiler, which in-DOM templates need).
 
-**scripts/app.js** defines `window.Elipsis`:
+**scripts/app.js** defines `window.Ellipsis`:
 - `createApp(options)`: `Vue.createApp(options)`, then `app.config.compilerOptions.delimiters = ["[[", "]]"]` and `app.use(Skeleton.vue)`.
 - `getJSON(url, options)`: fetch, reject when `!response.ok`, return parsed JSON.
 

@@ -1,4 +1,4 @@
-# elipsis
+# ellipsis
 
 A scaffold for Python Flask apps: one fixed layout, with the pieces every app ends up needing already wired together.
 
@@ -12,38 +12,38 @@ A scaffold for Python Flask apps: one fixed layout, with the pieces every app en
 - **Socket.IO** baked in but commented out
 - **pytest** unit tests
 
-elipsis is both this repository and an agent skill (`skills/elipsis`). The skill starts a new app from this repository when it can reach it, and rebuilds the same structure from its own notes when it cannot.
+ellipsis is both this repository and an agent skill (`skills/ellipsis`). The skill starts a new app from this repository when it can reach it, and rebuilds the same structure from its own notes when it cannot.
 
 ## Install the skill
 
 **Option 1: ask your agent.** Paste this into Claude Code, Codex, or any harness that supports skills:
 
 ```text
-Install the elipsis skill for me:
-1. Clone https://github.com/djynnius/ellipsis.git into ~/.elipsis (if it is already there, run git pull in it instead).
-2. Symlink ~/.elipsis/skills/elipsis into your own skills directory as "elipsis" (for Claude Code that is ~/.claude/skills/, for Codex and most other harnesses ~/.agents/skills/). Create the skills directory if it does not exist.
-3. Add this line to my shell profile if it is not already there: export ELIPSIS_REPO=https://github.com/djynnius/ellipsis.git
-4. Confirm that SKILL.md is readable through the symlink, then tell me how to start a new elipsis app.
+Install the ellipsis skill for me:
+1. Clone https://github.com/djynnius/ellipsis.git into ~/.ellipsis (if it is already there, run git pull in it instead).
+2. Symlink ~/.ellipsis/skills/ellipsis into your own skills directory as "ellipsis" (for Claude Code that is ~/.claude/skills/, for Codex and most other harnesses ~/.agents/skills/). Create the skills directory if it does not exist.
+3. Add this line to my shell profile if it is not already there: export ELLIPSIS_REPO=https://github.com/djynnius/ellipsis.git
+4. Confirm that SKILL.md is readable through the symlink, then tell me how to start a new ellipsis app.
 ```
 
 **Option 2: run it yourself.** Paste this into a terminal:
 
 ```bash
-git clone https://github.com/djynnius/ellipsis.git ~/.elipsis
+git clone https://github.com/djynnius/ellipsis.git ~/.ellipsis
 
 # Claude Code
-mkdir -p ~/.claude/skills && ln -sfn ~/.elipsis/skills/elipsis ~/.claude/skills/elipsis
+mkdir -p ~/.claude/skills && ln -sfn ~/.ellipsis/skills/ellipsis ~/.claude/skills/ellipsis
 
 # Codex and other harnesses that read ~/.agents/skills
-mkdir -p ~/.agents/skills && ln -sfn ~/.elipsis/skills/elipsis ~/.agents/skills/elipsis
+mkdir -p ~/.agents/skills && ln -sfn ~/.ellipsis/skills/ellipsis ~/.agents/skills/ellipsis
 
 # Lets the skill pull the latest scaffold when it starts a new app
-echo 'export ELIPSIS_REPO=https://github.com/djynnius/ellipsis.git' >> ~/.bashrc   # or ~/.zshrc
+echo 'export ELLIPSIS_REPO=https://github.com/djynnius/ellipsis.git' >> ~/.bashrc   # or ~/.zshrc
 ```
 
-Start a new session in your harness, then run `/elipsis` or say "build me an elipsis app called ...". To update the skill later, run `git -C ~/.elipsis pull`.
+Start a new session in your harness, then run `/ellipsis` or say "build me an ellipsis app called ...". To update the skill later, run `git -C ~/.ellipsis pull`.
 
-The clone in `~/.elipsis` doubles as the offline copy of the scaffold: with no connection the skill copies from it, and with no clone at all it rebuilds the structure from `skills/elipsis/references/architecture.md`.
+The clone in `~/.ellipsis` doubles as the offline copy of the scaffold: with no connection the skill copies from it, and with no clone at all it rebuilds the structure from `skills/ellipsis/references/architecture.md`.
 
 ## Use the scaffold directly
 
@@ -60,7 +60,7 @@ uv run pytest
 ## Structure
 
 ```
-elipsis/
+ellipsis/
 ├── app.py                  # create_app(): config, database, Redis, blueprints
 ├── config.yaml             # settings; ${VAR:default} slots are filled from .env
 ├── .env.example            # copy to .env (gitignored)
@@ -91,7 +91,7 @@ elipsis/
 ├── uploads/                # files users upload (contents gitignored)
 ├── downloads/              # files offered for download (contents gitignored)
 ├── unit_tests/             # pytest
-└── skills/elipsis/         # the agent skill
+└── skills/ellipsis/         # the agent skill
 ```
 
 ## Conventions
@@ -127,7 +127,7 @@ uv run alembic revision --autogenerate -m "add businesses"
 uv run alembic upgrade head
 ```
 
-**Vue uses `[[ ]]`** so it does not clash with Jinja's `{{ }}`. Start an app with `Elipsis.createApp({...}).mount("#app")`.
+**Vue uses `[[ ]]`** so it does not clash with Jinja's `{{ }}`. Start an app with `Ellipsis.createApp({...}).mount("#app")`.
 
 **Anything slow gets a skeleton.**
 

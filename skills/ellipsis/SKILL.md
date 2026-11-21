@@ -1,27 +1,27 @@
 ---
-name: elipsis
-description: Scaffold and build Python Flask apps on the elipsis structure (Flask blueprints, plain SQLAlchemy, Alembic, Jinja2 views, Vue.js, skeleton.js loading placeholders, Redis sessions and cache, config.yaml, pytest). Use when the user runs /elipsis, asks for an "elipsis app" or "ellipsis app" (either spelling), wants a new Flask app in their standard layout, or is adding routes, models, views or migrations to an app that already follows this layout.
+name: ellipsis
+description: Scaffold and build Python Flask apps on the ellipsis structure (Flask blueprints, plain SQLAlchemy, Alembic, Jinja2 views, Vue.js, skeleton.js loading placeholders, Redis sessions and cache, config.yaml, pytest). Use when the user runs /ellipsis, asks for an "ellipsis app" (including the misspelling "elipsis"), wants a new Flask app in their standard layout, or is adding routes, models, views or migrations to an app that already follows this layout.
 ---
 
-# elipsis
+# ellipsis
 
-elipsis is the user's standard structure for Flask apps. It exists as a git repository (the scaffold itself) and as this skill. Your job is either to start a new app from the scaffold or to extend an existing elipsis app without breaking its conventions.
+ellipsis is the user's standard structure for Flask apps. It exists as a git repository (the scaffold itself) and as this skill. Your job is either to start a new app from the scaffold or to extend an existing ellipsis app without breaking its conventions.
 
-An existing elipsis app is recognisable by `app.py`, `config.yaml`, and the folders `routes/`, `views/`, `controllers/`, `models/`, `migration/` side by side. If you are in one, skip to "Building in an elipsis app".
+An existing ellipsis app is recognisable by `app.py`, `config.yaml`, and the folders `routes/`, `views/`, `controllers/`, `models/`, `migration/` side by side. If you are in one, skip to "Building in an ellipsis app".
 
 ## Starting a new app
 
 Ask for the app name and target folder only if the request does not make them clear. Then get the scaffold from the first source that works:
 
-1. **The git repository.** If `ELIPSIS_REPO` is set, run `git clone --depth 1 "$ELIPSIS_REPO" <target>`. This is the preferred source because it is the most current.
+1. **The git repository.** If `ELLIPSIS_REPO` is set, run `git clone --depth 1 "$ELLIPSIS_REPO" <target>`. This is the preferred source because it is the most current.
 2. **A local checkout.** This skill is often a symlink into a checkout of the repository. Resolve this skill folder's real path; if two levels up there is an `app.py` and a `config.yaml`, copy that folder to the target, leaving out `.git`, `.venv`, `.env`, `__pycache__`, `.pytest_cache` and the contents of `databases/`, `uploads/` and `downloads/` other than their `.gitignore`.
 3. **From scratch.** With no repository and no checkout, build the structure yourself from `references/architecture.md`, which describes every file and its contract. Read it in full first. Fetch Vue from `https://unpkg.com/vue@3/dist/vue.global.prod.js` into `assets/scripts/vendor/`; if there is no network at all, leave a note in the README that the file must be added and carry on.
 
-If `ELIPSIS_REPO` is not set and you fell through to 2 or 3, say so in your final message so the user can set it.
+If `ELLIPSIS_REPO` is not set and you fell through to 2 or 3, say so in your final message so the user can set it.
 
 After the files are in place:
 
-1. Remove what belongs to the scaffold rather than the new app: `.git/`, `skills/` and `elipsis.md`. Keep `uv.lock`.
+1. Remove what belongs to the scaffold rather than the new app: `.git/`, `skills/` and `ellipsis.md`. Keep `uv.lock`.
 2. Set the app name in `config.yaml` (`app.name`) and `pyproject.toml` (`name`), and retitle `README.md` for the new app while keeping its structure tree and conventions sections.
 3. Copy `.env.example` to `.env` and put a fresh secret in it: `python -c "import secrets; print(secrets.token_hex(32))"`.
 4. `git init`, then install: `uv sync` (or, when uv is absent, `python -m venv .venv && .venv/bin/pip install -r requirements.txt`, and run the commands below from `.venv/bin/` instead of through `uv run`).
@@ -29,9 +29,9 @@ After the files are in place:
 
 Then build what the user asked for, following the rules below.
 
-## Building in an elipsis app
+## Building in an ellipsis app
 
-The layout is the point of elipsis, so keep to it even when another arrangement seems tidier. `AGENTS.md` in the app repeats these rules for agents that do not have this skill.
+The layout is the point of ellipsis, so keep to it even when another arrangement seems tidier. `AGENTS.md` in the app repeats these rules for agents that do not have this skill.
 
 **Routes.** One file per route in `routes/`, exposing `blueprint = Blueprint("<name>", __name__, url_prefix="/<name>")`. `routes/__init__.py` registers every module automatically, so do not touch `app.py` to add a route. JSON endpoints for a page live in the same route file.
 
@@ -43,9 +43,9 @@ The layout is the point of elipsis, so keep to it even when another arrangement 
 
 **Migrations.** Every schema change goes through Alembic: `uv run alembic revision --autogenerate -m "<what changed>"`, read the generated file, then `uv run alembic upgrade head`. Never call `Base.metadata.create_all` outside tests. `unit_tests/test_controllers.py` fails when models and migrations drift apart, which is your reminder to generate one.
 
-**Config.** Settings go in `config.yaml` and are read from `app.config["ELIPSIS"]`. Secrets and per-machine values go in `.env` and appear in `config.yaml` as `${VAR}` or `${VAR:default}`; add new variables to `.env.example` too.
+**Config.** Settings go in `config.yaml` and are read from `app.config["ELLIPSIS"]`. Secrets and per-machine values go in `.env` and appear in `config.yaml` as `${VAR}` or `${VAR:default}`; add new variables to `.env.example` too.
 
-**Front end.** Vue is loaded globally by `base.html`. Mount with `Elipsis.createApp({...}).mount("#app")`, which sets the delimiters to `[[ ]]` (Jinja owns `{{ }}`) and registers `v-skeleton`. Put `v-cloak` on the mount element. Page-specific scripts go in `{% block scripts %}` or a file in `assets/scripts/`; styles in `assets/css/`; icon fonts in `assets/fonts/`.
+**Front end.** Vue is loaded globally by `base.html`. Mount with `Ellipsis.createApp({...}).mount("#app")`, which sets the delimiters to `[[ ]]` (Jinja owns `{{ }}`) and registers `v-skeleton`. Put `v-cloak` on the mount element. Page-specific scripts go in `{% block scripts %}` or a file in `assets/scripts/`; styles in `assets/css/`; icon fonts in `assets/fonts/`.
 
 **Loading states.** Nothing slow may render as a blank gap:
 
@@ -60,7 +60,7 @@ The layout is the point of elipsis, so keep to it even when another arrangement 
 
 **Uploads and downloads.** Save uploaded files under `app.config["UPLOAD_FOLDER"]` and generated files under `app.config["DOWNLOAD_FOLDER"]`. Pass user-supplied filenames through `werkzeug.utils.secure_filename` and serve with `send_from_directory`.
 
-**Tests.** elipsis apps are unit tested rigorously. Each route, model and controller you add gets tests in `unit_tests/`, using the `app` and `client` fixtures in `conftest.py`. Run `uv run pytest` and report the real result.
+**Tests.** ellipsis apps are unit tested rigorously. Each route, model and controller you add gets tests in `unit_tests/`, using the `app` and `client` fixtures in `conftest.py`. Run `uv run pytest` and report the real result.
 
 ## Reference
 

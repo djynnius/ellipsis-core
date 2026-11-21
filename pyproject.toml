@@ -1,7 +1,7 @@
 [project]
-name = "elipsis-app"
+name = "ellipsis-app"
 version = "0.1.0"
-description = "An app built on the elipsis Flask scaffold"
+description = "An app built on the ellipsis Flask scaffold"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
