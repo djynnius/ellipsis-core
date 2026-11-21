@@ -21,7 +21,7 @@ If `ELLIPSIS_REPO` is not set and you fell through to 2 or 3, say so in your fin
 
 After the files are in place:
 
-1. Remove what belongs to the scaffold rather than the new app: `.git/`, `skills/` and `ellipsis.md`. Keep `uv.lock`.
+1. Remove what belongs to the scaffold rather than the new app: `.git/`, `.github/`, `skills/`, `ellipsis-core-site/` and `ellipsis.md`. Keep `uv.lock`.
 2. Set the app name in `config.yaml` (`app.name`) and `pyproject.toml` (`name`), and retitle `README.md` for the new app while keeping its structure tree and conventions sections.
 3. Copy `.env.example` to `.env` and put a fresh secret in it: `python -c "import secrets; print(secrets.token_hex(32))"`.
 4. `git init`, then install: `uv sync` (or, when uv is absent, `python -m venv .venv && .venv/bin/pip install -r requirements.txt`, and run the commands below from `.venv/bin/` instead of through `uv run`).

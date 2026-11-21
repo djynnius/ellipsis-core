@@ -2,6 +2,8 @@
 
 A scaffold for Python Flask apps: one fixed layout, with the pieces every app ends up needing already wired together.
 
+**Site:** https://djynnius.github.io/ellipsis-core/
+
 - **Flask** with blueprints, one per route
 - **SQLAlchemy** (plain SQLAlchemy, not Flask-SQLAlchemy) and **Alembic** for every migration
 - **Jinja2** views with a base template and reusable elements
@@ -91,7 +93,8 @@ ellipsis-core/
 ├── uploads/                # files users upload (contents gitignored)
 ├── downloads/              # files offered for download (contents gitignored)
 ├── unit_tests/             # pytest
-└── skills/ellipsis/         # the agent skill
+├── skills/ellipsis/        # the agent skill
+└── ellipsis-core-site/     # the public site, published to GitHub Pages
 ```
 
 ## Conventions

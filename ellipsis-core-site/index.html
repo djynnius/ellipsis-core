@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ellipsis Core: a warm Flask scaffold</title>
+<meta name="description" content="A scaffold for Python Flask apps: one fixed layout with Flask, SQLAlchemy, Alembic, Jinja2, Vue and Redis already wired together.">
+<link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<div id="app" v-cloak style="position:relative;overflow:hidden;background:#FBF8F4;color:#1F1A17;font-family:Inter,-apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;font-size:16px;line-height:24px">
+
+<!-- soft background colour -->
+<div class="blob" style="position:absolute;top:-120px;left:-140px;width:520px;height:520px;border-radius:999px;background:#F28A1E;opacity:0.20"></div>
+<div class="blob" style="position:absolute;top:140px;right:-160px;width:560px;height:560px;border-radius:999px;background:#A63E8E;opacity:0.14;animation-delay:-5s"></div>
+<div class="blob" style="position:absolute;top:620px;left:30%;width:380px;height:380px;border-radius:999px;background:#F6B81A;opacity:0.20;animation-delay:-9s"></div>
+
+<!-- NAV -->
+<div style="position:relative;z-index:2;padding:20px clamp(16px,4vw,48px) 0">
+  <div class="el-glass" style="max-width:1200px;margin:0 auto;box-sizing:border-box;padding:10px 16px 10px 20px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;border-radius:999px">
+    <a href="#top" aria-label="Ellipsis Core home" style="display:flex;align-items:center;min-height:44px">
+      <svg viewBox="0 0 16067 2774" width="150" height="26" role="img" aria-label="ellipsis core"><g transform="matrix(1 0 0 -1 0 2198)"><path fill="#1F1A17" d="M866 -30Q635 -30 467.5 66.5Q300 163 210.0 340.5Q120 518 120 759Q120 996 210.5 1175.5Q301 1355 464.0 1455.5Q627 1556 847 1556Q989 1556 1115.5 1510.5Q1242 1465 1339.5 1370.0Q1437 1275 1493.0 1128.5Q1549 982 1549 780V669H479Q481 541 528 449Q577 353 665.0 302.5Q753 252 871 252Q950 252 1014.0 274.5Q1078 297 1125.0 341.0Q1172 385 1196 450L1534 412Q1502 278 1412.5 178.5Q1323 79 1184.0 24.5Q1045 -30 866 -30ZM480 913H1202Q1201 1017 1157.0 1098.5Q1113 1180 1034.5 1227.0Q956 1274 852 1274Q741 1274 657.0 1220.5Q573 1167 527 1081Q485 1003 480 913ZM2197 2048V0H1835V2048ZM2911 2048V0H2549V2048ZM3263 0V1536H3625V0ZM3977 -576V1536H4333V1282H4354Q4382 1338 4433.0 1401.5Q4484 1465 4571.0 1510.5Q4658 1556 4793 1556Q4971 1556 5114.5 1465.5Q5258 1375 5342.5 1198.5Q5427 1022 5427 766Q5427 513 5344.0 336.0Q5261 159 5118.0 66.0Q4975 -27 4794 -27Q4662 -27 4575.0 17.0Q4488 61 4435.5 123.5Q4383 186 4354 242H4339V-576ZM4332 768Q4332 619 4374.5 507.0Q4417 395 4497.5 332.5Q4578 270 4693 270Q4813 270 4894.0 334.5Q4975 399 5016.5 511.5Q5058 624 5058 768Q5058 911 5017.0 1022.0Q4976 1133 4895.0 1196.0Q4814 1259 4693 1259Q4577 1259 4496.0 1198.0Q4415 1137 4373.5 1027.0Q4332 917 4332 768ZM6930 1130 6600 1094Q6586 1144 6551.5 1188.0Q6517 1232 6459.0 1259.0Q6401 1286 6317 1286Q6204 1286 6127.5 1237.0Q6051 1188 6052 1110Q6051 1043 6101.5 1001.0Q6152 959 6269 932L6531 876Q6749 829 6855.5 727.0Q6962 625 6963 460Q6962 315 6878.5 204.5Q6795 94 6647.0 32.0Q6499 -30 6307 -30Q6025 -30 5853.0 88.5Q5681 207 5648 419L6001 453Q6025 349 6103.0 296.0Q6181 243 6306 243Q6435 243 6513.5 296.0Q6592 349 6592 427Q6592 493 6541.5 536.0Q6491 579 6385 602L6123 657Q5902 703 5796.0 812.5Q5690 922 5691 1090Q5690 1232 5768.5 1336.5Q5847 1441 5987.5 1498.5Q6128 1556 6312 1556Q6582 1556 6737.5 1441.0Q6893 1326 6930 1130ZM7242 0V1536H7604V0ZM9170 1130 8840 1094Q8826 1144 8791.5 1188.0Q8757 1232 8699.0 1259.0Q8641 1286 8557 1286Q8444 1286 8367.5 1237.0Q8291 1188 8292 1110Q8291 1043 8341.5 1001.0Q8392 959 8509 932L8771 876Q8989 829 9095.5 727.0Q9202 625 9203 460Q9202 315 9118.5 204.5Q9035 94 8887.0 32.0Q8739 -30 8547 -30Q8265 -30 8093.0 88.5Q7921 207 7888 419L8241 453Q8265 349 8343.0 296.0Q8421 243 8546 243Q8675 243 8753.5 296.0Q8832 349 8832 427Q8832 493 8781.5 536.0Q8731 579 8625 602L8363 657Q8142 703 8036.0 812.5Q7930 922 7931 1090Q7930 1232 8008.5 1336.5Q8087 1441 8227.5 1498.5Q8368 1556 8552 1556Q8822 1556 8977.5 1441.0Q9133 1326 9170 1130Z"></path><path fill="#1F1A17" d="M11027.2 -32Q10811.2 -32 10655.2 70.0Q10499.2 172 10415.2 351.0Q10331.2 530 10331.2 760Q10331.2 994 10417.7 1173.5Q10504.2 1353 10659.7 1454.5Q10815.2 1556 11023.2 1556Q11185.2 1556 11315.2 1496.0Q11445.2 1436 11528.2 1328.0Q11611.2 1220 11631.2 1076H11395.2Q11368.2 1181 11275.7 1262.5Q11183.2 1344 11027.2 1344Q10889.2 1344 10785.7 1272.5Q10682.2 1201 10624.7 1071.5Q10567.2 942 10567.2 768Q10567.2 590 10623.7 458.0Q10680.2 326 10783.7 253.0Q10887.2 180 11027.2 180Q11119.2 180 11194.2 212.0Q11269.2 244 11321.2 304.0Q11373.2 364 11395.2 448H11631.2Q11611.2 312 11532.7 203.5Q11454.2 95 11325.7 31.5Q11197.2 -32 11027.2 -32ZM12579.2 -32Q12371.2 -32 12214.7 67.0Q12058.2 166 11970.7 344.0Q11883.2 522 11883.2 760Q11883.2 1000 11970.7 1179.0Q12058.2 1358 12214.7 1457.0Q12371.2 1556 12579.2 1556Q12787.2 1556 12943.7 1457.0Q13100.2 1358 13187.7 1179.0Q13275.2 1000 13275.2 760Q13275.2 522 13187.7 344.0Q13100.2 166 12943.7 67.0Q12787.2 -32 12579.2 -32ZM12579.2 180Q12737.2 180 12839.2 261.0Q12941.2 342 12990.2 474.0Q13039.2 606 13039.2 760Q13039.2 914 12990.2 1047.0Q12941.2 1180 12839.2 1262.0Q12737.2 1344 12579.2 1344Q12421.2 1344 12319.2 1262.0Q12217.2 1180 12168.2 1047.0Q12119.2 914 12119.2 760Q12119.2 606 12168.2 474.0Q12217.2 342 12319.2 261.0Q12421.2 180 12579.2 180ZM13615.2 0V1536H13843.2V1304H13859.2Q13901.2 1418 14011.2 1489.0Q14121.2 1560 14259.2 1560Q14285.2 1560 14324.2 1559.0Q14363.2 1558 14383.2 1556V1316Q14371.2 1319 14328.7 1325.5Q14286.2 1332 14239.2 1332Q14127.2 1332 14039.7 1285.5Q13952.2 1239 13901.7 1157.5Q13851.2 1076 13851.2 972V0ZM15287.2 -32Q15065.2 -32 14904.7 66.5Q14744.2 165 14657.7 342.5Q14571.2 520 14571.2 756.0Q14571.2 992 14657.7 1172.5Q14744.2 1353 14899.7 1454.5Q15055.2 1556 15263.2 1556Q15383.2 1556 15500.2 1516.0Q15617.2 1476 15713.2 1386.5Q15809.2 1297 15866.2 1150.0Q15923.2 1003 15923.2 788V688H14808.2Q14813.2 535 14868.2 426Q14928.2 305 15036.2 242.5Q15144.2 180 15287.2 180Q15380.2 180 15455.7 206.5Q15531.2 233 15586.2 286.5Q15641.2 340 15671.2 420L15899.2 356Q15863.2 240 15778.2 152.5Q15693.2 65 15568.2 16.5Q15443.2 -32 15287.2 -32ZM14808.2 892H15683.2Q15683.2 1022 15631.7 1124.0Q15580.2 1226 15485.7 1285.0Q15391.2 1344 15263.2 1344Q15122.2 1344 15019.7 1274.5Q14917.2 1205 14862.2 1094Q14815.2 999 14808.2 892Z"></path><circle cx="3445" cy="1950" r="248" fill="#F28A1E"></circle><circle cx="5538" cy="1950" r="248" fill="#A63E8E"></circle><circle cx="7424" cy="1950" r="248" fill="#6A4CB5"></circle></g></svg>
+    </a>
+    <nav aria-label="Sections" style="display:flex;flex-wrap:wrap;align-items:center;gap:4px">
+      <a href="#stack" style="display:inline-flex;align-items:center;min-height:44px;padding:0 12px;color:#1F1A17;font-size:14px;font-weight:500;text-decoration:none">What's inside</a>
+      <a href="#layout" style="display:inline-flex;align-items:center;min-height:44px;padding:0 12px;color:#1F1A17;font-size:14px;font-weight:500;text-decoration:none">Layout</a>
+      <a href="#conventions" style="display:inline-flex;align-items:center;min-height:44px;padding:0 12px;color:#1F1A17;font-size:14px;font-weight:500;text-decoration:none">Conventions</a>
+      <a href="#install" style="display:inline-flex;align-items:center;min-height:44px;padding:0 12px;color:#1F1A17;font-size:14px;font-weight:500;text-decoration:none">Install</a>
+      <a href="#quickstart" style="display:inline-flex;align-items:center;min-height:44px;padding:0 12px;color:#1F1A17;font-size:14px;font-weight:500;text-decoration:none">Quickstart</a>
+      <a class="el-btn el-primary" href="https://github.com/djynnius/ellipsis-core" style="margin-left:8px">GitHub</a>
+    </nav>
+  </div>
+</div>
+
+<!-- HERO -->
+<section id="top" style="position:relative;z-index:1;max-width:1200px;margin:0 auto;box-sizing:border-box;padding:56px clamp(16px,4vw,48px) 40px;display:flex;flex-wrap:wrap;align-items:center;gap:32px">
+  <div style="flex:1 1 460px;min-width:0;display:flex;flex-direction:column;gap:24px;align-items:flex-start">
+    <div class="el-glass" style="display:inline-flex;align-items:center;gap:10px;padding:6px 14px 6px 10px;border-radius:999px">
+      <svg viewBox="0 0 88 24" width="44" height="12" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#F28A1E"></circle><circle cx="44" cy="12" r="12" fill="#A63E8E"></circle><circle cx="76" cy="12" r="12" fill="#6A4CB5"></circle></svg>
+      <span style="font-size:14px;line-height:20px;font-weight:500">A scaffold for Python Flask apps</span>
+    </div>
+    <h1 style="margin:0;font-size:clamp(40px,5.4vw,56px);line-height:1.07;font-weight:700;letter-spacing:-0.03em">Build something warm<span style="display:inline-flex;gap:6px;margin-left:10px;vertical-align:baseline"><span class="dot" style="background:#F28A1E"></span><span class="dot" style="background:#A63E8E;animation-delay:.2s"></span><span class="dot" style="background:#6A4CB5;animation-delay:.4s"></span></span></h1>
+    <p style="margin:0;font-size:18px;line-height:28px;color:#6B625B;max-width:520px">One fixed layout, with the pieces every app ends up needing already wired together: Flask, SQLAlchemy, Alembic, Jinja2, Vue and Redis. It stays quiet and leaves room for whatever you build on top.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:12px">
+      <a class="el-btn el-primary" href="#install">Install it</a>
+      <a class="el-btn el-secondary" href="#stack">See what's inside</a>
+    </div>
+    <div class="el-glass" style="display:flex;align-items:center;gap:8px;padding:8px 8px 8px 16px;border-radius:12px;max-width:100%;box-sizing:border-box">
+      <code style="font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:13px;line-height:20px;color:#1F1A17;overflow-x:auto;white-space:nowrap;min-width:0">git clone https://github.com/djynnius/ellipsis-core.git</code>
+      <button class="el-btn el-secondary" @click="vm.copyClone" style="flex:none;min-width:96px;padding:0 14px" aria-live="polite">{{ vm.copyLabel }}</button>
+    </div>
+  </div>
+
+  <!-- hero illustration: flask letting the dots out -->
+  <div style="flex:1 1 380px;min-width:0;display:flex;justify-content:center">
+    <svg viewBox="0 0 520 560" width="100%" style="max-width:520px;height:auto;overflow:visible" role="img" aria-label="A glass flask of warm liquid releasing three glossy dots: orange, berry and indigo">
+      <defs>
+        <clipPath id="flaskClip"><path d="M 225 196 L 225 262 C 225 292 118 382 118 452 C 118 502 160 522 210 522 L 310 522 C 362 522 402 502 402 452 C 402 382 295 292 295 262 L 295 196 Z"></path></clipPath>
+      </defs>
+      <ellipse cx="260" cy="534" rx="150" ry="14" fill="#1F1A17" opacity="0.08"></ellipse>
+      <!-- flask glass -->
+      <path d="M 225 196 L 225 262 C 225 292 118 382 118 452 C 118 502 160 522 210 522 L 310 522 C 362 522 402 502 402 452 C 402 382 295 292 295 262 L 295 196 Z" fill="#FFFFFF" fill-opacity="0.55"></path>
+      <!-- liquid -->
+      <g clip-path="url(#flaskClip)">
+        <g class="wav"><path d="M 0 410 Q 30 394 60 410 T 120 410 T 180 410 T 240 410 T 300 410 T 360 410 T 420 410 T 480 410 T 540 410 L 540 560 L 0 560 Z" fill="#F28A1E"></path></g>
+        <g class="wav" style="animation-duration:6s;animation-direction:reverse"><path d="M 0 440 Q 30 426 60 440 T 120 440 T 180 440 T 240 440 T 300 440 T 360 440 T 420 440 T 480 440 T 540 440 L 540 560 L 0 560 Z" fill="#E0402A" opacity="0.55"></path></g>
+        <circle class="bub" cx="190" cy="500" r="9" fill="#FFFFFF" opacity="0.7"></circle>
+        <circle class="bub" cx="250" cy="505" r="6" fill="#FFFFFF" opacity="0.7" style="animation-delay:1.2s"></circle>
+        <circle class="bub" cx="305" cy="498" r="11" fill="#FFFFFF" opacity="0.7" style="animation-delay:2.1s"></circle>
+        <circle class="bub" cx="345" cy="506" r="7" fill="#FFFFFF" opacity="0.7" style="animation-delay:.6s"></circle>
+      </g>
+      <path d="M 225 196 L 225 262 C 225 292 118 382 118 452 C 118 502 160 522 210 522 L 310 522 C 362 522 402 502 402 452 C 402 382 295 292 295 262 L 295 196 Z" fill="none" stroke="#1F1A17" stroke-opacity="0.22" stroke-width="3" stroke-linejoin="round"></path>
+      <rect x="213" y="182" width="94" height="20" rx="10" fill="#FFFFFF" stroke="#1F1A17" stroke-opacity="0.22" stroke-width="3"></rect>
+      <path d="M 148 452 C 148 420 188 362 214 312" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" opacity="0.85"></path>
+      <!-- the dots -->
+      <g class="fl1"><g>
+        <circle cx="258" cy="122" r="46" fill="#D9730A"></circle>
+        <circle cx="254" cy="118" r="40" fill="#F28A1E"></circle>
+        <ellipse cx="240" cy="102" rx="13" ry="8" fill="#FFFFFF" opacity="0.6" transform="rotate(-30 240 102)"></ellipse>
+      </g></g>
+      <g class="fl2"><g>
+        <circle cx="350" cy="64" r="38" fill="#86306F"></circle>
+        <circle cx="347" cy="61" r="33" fill="#A63E8E"></circle>
+        <ellipse cx="336" cy="49" rx="11" ry="6.5" fill="#FFFFFF" opacity="0.6" transform="rotate(-30 336 49)"></ellipse>
+      </g></g>
+      <g class="fl3"><g>
+        <circle cx="436" cy="52" r="30" fill="#54399A"></circle>
+        <circle cx="434" cy="50" r="26" fill="#6A4CB5"></circle>
+        <ellipse cx="425" cy="41" rx="8.5" ry="5" fill="#FFFFFF" opacity="0.6" transform="rotate(-30 425 41)"></ellipse>
+      </g></g>
+      <!-- the rest of the rainbow, trailing off -->
+      <g class="fl4"><circle cx="486" cy="128" r="9" fill="#C8361F"></circle></g>
+      <g class="fl2"><circle cx="104" cy="150" r="11" fill="#F6B81A"></circle></g>
+      <g class="fl3"><circle cx="60" cy="250" r="8" fill="#649D2B"></circle></g>
+      <g class="fl1"><circle cx="150" cy="70" r="7" fill="#4466C0"></circle></g>
+      <path class="tw" d="M0 -12 L3 -3 L12 0 L3 3 L0 12 L-3 3 L-12 0 L-3 -3 Z" fill="#F6B81A" transform="translate(190 36)"></path>
+      <path class="tw" d="M0 -9 L2.4 -2.4 L9 0 L2.4 2.4 L0 9 L-2.4 2.4 L-9 0 L-2.4 -2.4 Z" fill="#E0402A" transform="translate(470 190)" style="animation-delay:1s"></path>
+      <path class="tw" d="M0 -9 L2.4 -2.4 L9 0 L2.4 2.4 L0 9 L-2.4 2.4 L-9 0 L-2.4 -2.4 Z" fill="#4466C0" transform="translate(70 360)" style="animation-delay:1.8s"></path>
+    </svg>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div aria-hidden="true" style="position:relative;z-index:1;overflow:hidden;border-top:1px solid rgba(31,26,23,0.10);border-bottom:1px solid rgba(31,26,23,0.10);background:#F3EEE8;padding:18px 0">
+  <div class="mq">
+    <div style="display:flex;align-items:center;gap:28px;padding-right:28px;font-size:22px;line-height:28px;font-weight:600;letter-spacing:-0.01em;white-space:nowrap">
+      <span>Flask</span><span style="width:10px;height:10px;border-radius:999px;background:#F28A1E"></span>
+      <span>SQLAlchemy</span><span style="width:10px;height:10px;border-radius:999px;background:#A63E8E"></span>
+      <span>Alembic</span><span style="width:10px;height:10px;border-radius:999px;background:#6A4CB5"></span>
+      <span>Jinja2</span><span style="width:10px;height:10px;border-radius:999px;background:#F6B81A"></span>
+      <span>Vue</span><span style="width:10px;height:10px;border-radius:999px;background:#649D2B"></span>
+      <span>Redis</span><span style="width:10px;height:10px;border-radius:999px;background:#E0402A"></span>
+      <span>Socket.IO</span><span style="width:10px;height:10px;border-radius:999px;background:#4466C0"></span>
+      <span>pytest</span><span style="width:10px;height:10px;border-radius:999px;background:#F28A1E"></span>
+    </div>
+    <div style="display:flex;align-items:center;gap:28px;padding-right:28px;font-size:22px;line-height:28px;font-weight:600;letter-spacing:-0.01em;white-space:nowrap">
+      <span>Flask</span><span style="width:10px;height:10px;border-radius:999px;background:#F28A1E"></span>
+      <span>SQLAlchemy</span><span style="width:10px;height:10px;border-radius:999px;background:#A63E8E"></span>
+      <span>Alembic</span><span style="width:10px;height:10px;border-radius:999px;background:#6A4CB5"></span>
+      <span>Jinja2</span><span style="width:10px;height:10px;border-radius:999px;background:#F6B81A"></span>
+      <span>Vue</span><span style="width:10px;height:10px;border-radius:999px;background:#649D2B"></span>
+      <span>Redis</span><span style="width:10px;height:10px;border-radius:999px;background:#E0402A"></span>
+      <span>Socket.IO</span><span style="width:10px;height:10px;border-radius:999px;background:#4466C0"></span>
+      <span>pytest</span><span style="width:10px;height:10px;border-radius:999px;background:#F28A1E"></span>
+    </div>
+  </div>
+</div>
+
+<!-- STACK -->
+<section id="stack" style="position:relative;z-index:1;max-width:1200px;margin:0 auto;box-sizing:border-box;padding:96px clamp(16px,4vw,48px) 0">
+  <div style="max-width:620px;display:flex;flex-direction:column;gap:12px">
+    <span style="font-size:12px;line-height:16px;font-weight:500;letter-spacing:0.01em;color:#6B625B">WHAT'S INSIDE</span>
+    <h2 style="margin:0;font-size:32px;line-height:38px;font-weight:700;letter-spacing:-0.02em">Everything an app ends up needing.</h2>
+    <p style="margin:0;color:#6B625B">Pick a piece to see what it does and where it lives.</p>
+  </div>
+  <div style="margin-top:32px;display:flex;flex-wrap:wrap;gap:32px;align-items:stretch">
+    <div style="flex:1 1 320px;min-width:0;display:flex;flex-wrap:wrap;align-content:flex-start;gap:12px">
+      <template v-for="(t, i_t) in vm.techs" :key="i_t">
+        <button class="el-chip" @click="t.pick" :aria-pressed="t.selected" :style="t.style">
+          <span :style="`width:10px;height:10px;border-radius:999px;background:${t.color};flex:none`"></span>
+          <span>{{ t.label }}</span>
+        </button>
+      </template>
+    </div>
+    <div class="el-glass popin" style="flex:1.4 1 360px;min-width:0;box-sizing:border-box;padding:32px;display:flex;flex-direction:column;gap:16px;min-height:300px">
+      <div style="display:flex;align-items:center;gap:12px">
+        <span :style="`width:14px;height:14px;border-radius:999px;background:${vm.tech.color}`"></span>
+        <h3 style="margin:0;font-size:22px;line-height:28px;font-weight:600;letter-spacing:-0.01em">{{ vm.tech.label }}</h3>
+      </div>
+      <p style="margin:0">{{ vm.tech.body }}</p>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <span style="font-size:12px;line-height:16px;font-weight:500;letter-spacing:0.01em;color:#6B625B">WHERE IT LIVES</span>
+        <code style="font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:13px;line-height:20px;background:#F3EEE8;border-radius:8px;padding:8px 12px;overflow-x:auto;white-space:nowrap">{{ vm.tech.where }}</code>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <span style="font-size:12px;line-height:16px;font-weight:500;letter-spacing:0.01em;color:#6B625B">IN PRACTICE</span>
+        <code style="font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:13px;line-height:20px;background:#F3EEE8;border-radius:8px;padding:8px 12px;overflow-x:auto;white-space:nowrap">{{ vm.tech.snippet }}</code>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LAYOUT -->
+<section id="layout" style="position:relative;z-index:1;max-width:1200px;margin:0 auto;box-sizing:border-box;padding:112px clamp(16px,4vw,48px) 0">
+  <div style="max-width:620px;display:flex;flex-direction:column;gap:12px">
+    <span style="font-size:12px;line-height:16px;font-weight:500;letter-spacing:0.01em;color:#6B625B">ONE FIXED LAYOUT</span>
+    <h2 style="margin:0;font-size:32px;line-height:38px;font-weight:700;letter-spacing:-0.02em">Seven folders. Each one has a job.</h2>
+    <p style="margin:0;color:#6B625B">Every app starts with the same shape, so you never hunt for where something goes. Choose a folder and its slab lifts out of the stack.</p>
+  </div>
+  <div style="margin-top:32px;display:flex;flex-wrap:wrap;gap:32px;align-items:center">
+    <div style="flex:1 1 380px;min-width:0;display:flex;justify-content:center">
+      <svg viewBox="0 0 560 560" width="100%" style="max-width:520px;height:auto;overflow:visible" role="img" aria-label="An isometric stack of seven coloured slabs, one for each folder, with three dots hovering above">
+        <ellipse cx="260" cy="520" rx="170" ry="22" fill="#1F1A17" opacity="0.07"></ellipse>
+        <g :style="`transform:translate(${vm.slab0.x}px,${vm.slab0.y}px);opacity:${vm.slab0.op};transition:transform .45s cubic-bezier(.3,1.4,.5,1),opacity .3s`">
+          <polygon points="-110,0 0,55 0,77 -110,22" fill="#86306F"></polygon><polygon points="0,55 110,0 110,22 0,77" fill="#95387F"></polygon><polygon points="0,-55 110,0 0,55 -110,0" fill="#A63E8E"></polygon>
+        </g>
+        <g :style="`transform:translate(${vm.slab1.x}px,${vm.slab1.y}px);opacity:${vm.slab1.op};transition:transform .45s cubic-bezier(.3,1.4,.5,1),opacity .3s`">
+          <polygon points="-110,0 0,55 0,77 -110,22" fill="#54399A"></polygon><polygon points="0,55 110,0 110,22 0,77" fill="#5F43A8"></polygon><polygon points="0,-55 110,0 0,55 -110,0" fill="#6A4CB5"></polygon>
+        </g>
+        <g :style="`transform:translate(${vm.slab2.x}px,${vm.slab2.y}px);opacity:${vm.slab2.op};transition:transform .45s cubic-bezier(.3,1.4,.5,1),opacity .3s`">
+          <polygon points="-110,0 0,55 0,77 -110,22" fill="#35519A"></polygon><polygon points="0,55 110,0 110,22 0,77" fill="#3D5CAE"></polygon><polygon points="0,-55 110,0 0,55 -110,0" fill="#4466C0"></polygon>
+        </g>
+        <g :style="`transform:translate(${vm.slab3.x}px,${vm.slab3.y}px);opacity:${vm.slab3.op};transition:transform .45s cubic-bezier(.3,1.4,.5,1),opacity .3s`">
+          <polygon points="-110,0 0,55 0,77 -110,22" fill="#4E7E1F"></polygon><polygon points="0,55 110,0 110,22 0,77" fill="#598E26"></polygon><polygon points="0,-55 110,0 0,55 -110,0" fill="#649D2B"></polygon>
+        </g>
+        <g :style="`transform:translate(${vm.slab4.x}px,${vm.slab4.y}px);opacity:${vm.slab4.op};transition:transform .45s cubic-bezier(.3,1.4,.5,1),opacity .3s`">
+          <polygon points="-110,0 0,55 0,77 -110,22" fill="#CE9610"></polygon><polygon points="0,55 110,0 110,22 0,77" fill="#E3A715"></polygon><polygon points="0,-55 110,0 0,55 -110,0" fill="#F6B81A"></polygon>
+        </g>
+        <g :style="`transform:translate(${vm.slab5.x}px,${vm.slab5.y}px);opacity:${vm.slab5.op};transition:transform .45s cubic-bezier(.3,1.4,.5,1),opacity .3s`">
+          <polygon points="-110,0 0,55 0,77 -110,22" fill="#C96D0E"></polygon><polygon points="0,55 110,0 110,22 0,77" fill="#DE7A16"></polygon><polygon points="0,-55 110,0 0,55 -110,0" fill="#F28A1E"></polygon>
+        </g>
+        <g :style="`transform:translate(${vm.slab6.x}px,${vm.slab6.y}px);opacity:${vm.slab6.op};transition:transform .45s cubic-bezier(.3,1.4,.5,1),opacity .3s`">
+          <polygon points="-110,0 0,55 0,77 -110,22" fill="#B8301D"></polygon><polygon points="0,55 110,0 110,22 0,77" fill="#C93724"></polygon><polygon points="0,-55 110,0 0,55 -110,0" fill="#E0402A"></polygon>
+        </g>
+        <!-- three dots hovering over the stack -->
+        <g class="fl1"><circle cx="190" cy="52" r="22" fill="#D9730A"></circle><circle cx="188" cy="50" r="19" fill="#F28A1E"></circle><ellipse cx="181" cy="43" rx="6" ry="3.6" fill="#FFFFFF" opacity="0.6" transform="rotate(-30 181 43)"></ellipse></g>
+        <g class="fl2"><circle cx="260" cy="34" r="22" fill="#86306F"></circle><circle cx="258" cy="32" r="19" fill="#A63E8E"></circle><ellipse cx="251" cy="25" rx="6" ry="3.6" fill="#FFFFFF" opacity="0.6" transform="rotate(-30 251 25)"></ellipse></g>
+        <g class="fl3"><circle cx="330" cy="52" r="22" fill="#54399A"></circle><circle cx="328" cy="50" r="19" fill="#6A4CB5"></circle><ellipse cx="321" cy="43" rx="6" ry="3.6" fill="#FFFFFF" opacity="0.6" transform="rotate(-30 321 43)"></ellipse></g>
+      </svg>
+    </div>
+    <div style="flex:1 1 360px;min-width:0;display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;flex-wrap:wrap;gap:8px" role="group" aria-label="Folders">
+        <template v-for="(f, i_f) in vm.folders" :key="i_f">
+          <button class="el-chip" @click="f.pick" :aria-pressed="f.selected" :style="f.style">
+            <span :style="`width:10px;height:10px;border-radius:4px;background:${f.color};flex:none`"></span>
+            <span style="font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:13px">{{ f.name }}</span>
+          </button>
+        </template>
+      </div>
+      <div class="el-glass popin" style="box-sizing:border-box;padding:28px;display:flex;flex-direction:column;gap:12px;min-height:170px">
+        <h3 style="margin:0;font-size:22px;line-height:28px;font-weight:600;letter-spacing:-0.01em">{{ vm.folder.name }}</h3>
+        <p style="margin:0">{{ vm.folder.body }}</p>
+        <code style="font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:13px;line-height:20px;color:#6B625B">{{ vm.folder.note }}</code>
+      </div>
+      <p style="margin:0;font-size:14px;line-height:20px;font-weight:500;color:#6B625B">Plus app.py, config.yaml and .env at the top, and uploads, downloads and unit_tests alongside.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONVENTIONS -->
+<section id="conventions" style="position:relative;z-index:1;max-width:1200px;margin:0 auto;box-sizing:border-box;padding:112px clamp(16px,4vw,48px) 0">
+  <div style="max-width:620px;display:flex;flex-direction:column;gap:12px">
+    <span style="font-size:12px;line-height:16px;font-weight:500;letter-spacing:0.01em;color:#6B625B">CONVENTIONS</span>
+    <h2 style="margin:0;font-size:32px;line-height:38px;font-weight:700;letter-spacing:-0.02em">Names do the wiring.</h2>
+    <p style="margin:0;color:#6B625B">Routes map to views, and every table gets the same columns. Try both.</p>
+  </div>
+  <div style="margin-top:32px;display:flex;flex-wrap:wrap;gap:24px;align-items:stretch">
+    <div class="el-glass" style="flex:1 1 400px;min-width:0;box-sizing:border-box;padding:32px;display:flex;flex-direction:column;gap:16px">
+      <h3 style="margin:0;font-size:22px;line-height:28px;font-weight:600;letter-spacing:-0.01em">Routes map to views</h3>
+      <label for="routeName" style="font-size:14px;line-height:20px;font-weight:500">Name a route</label>
+      <input id="routeName" type="text" :value="vm.routeRaw" @input="vm.setRoute" autocomplete="off" spellcheck="false" style="min-height:44px;box-sizing:border-box;padding:0 14px;border-radius:8px;border:1px solid rgba(31,26,23,0.10);background:#F3EEE8;color:#1F1A17;font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:14px">
+      <div style="display:flex;flex-direction:column;gap:8px;font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:13px;line-height:20px">
+        <div style="display:flex;align-items:center;gap:10px;background:#FFFFFF;border-radius:8px;padding:8px 12px;border:1px solid rgba(31,26,23,0.10)"><span style="width:10px;height:10px;border-radius:999px;background:#E0402A;flex:none"></span><span style="overflow-wrap:anywhere">routes/{{ vm.routeName }}.py</span></div>
+        <div style="display:flex;align-items:center;gap:10px;background:#FFFFFF;border-radius:8px;padding:8px 12px;border:1px solid rgba(31,26,23,0.10)"><span style="width:10px;height:10px;border-radius:999px;background:#F28A1E;flex:none"></span><span style="overflow-wrap:anywhere">views/{{ vm.routeName }}/index.html</span></div>
+        <div style="display:flex;align-items:center;gap:10px;background:#FFFFFF;border-radius:8px;padding:8px 12px;border:1px solid rgba(31,26,23,0.10)"><span style="width:10px;height:10px;border-radius:999px;background:#6A4CB5;flex:none"></span><span style="overflow-wrap:anywhere">GET /{{ vm.routeName }}/</span></div>
+      </div>
+      <code style="font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:13px;line-height:20px;background:#F3EEE8;border-radius:8px;padding:12px;overflow-x:auto;white-space:pre">{{ vm.routeCode }}</code>
+    </div>
+    <div class="el-glass" style="flex:1 1 400px;min-width:0;box-sizing:border-box;padding:32px;display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px">
+        <h3 style="margin:0;font-size:22px;line-height:28px;font-weight:600;letter-spacing:-0.01em">Standard columns</h3>
+        <button class="el-btn el-secondary" @click="vm.toggleSoft" :aria-pressed="vm.soft">{{ vm.softLabel }}</button>
+      </div>
+      <p style="margin:0;color:#6B625B;font-size:14px;line-height:20px">Inherit StandardColumns and these fill themselves in. Add SoftDelete where rows must be recoverable.</p>
+      <div style="display:flex;flex-direction:column;border-radius:12px;overflow:hidden;border:1px solid rgba(31,26,23,0.10);background:#FFFFFF">
+        <template v-for="(c, i_c) in vm.columns" :key="i_c">
+          <div :class="c.cls" :style="`display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;padding:10px 16px;border-top:1px solid rgba(31,26,23,0.10);background:${c.bg}`">
+            <code style="font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:13px;line-height:20px;font-weight:500">{{ c.name }}</code>
+            <span style="font-size:14px;line-height:20px;color:#6B625B">{{ c.note }}</span>
+          </div>
+        </template>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPEED -->
+<section id="speed" style="position:relative;z-index:1;max-width:1200px;margin:0 auto;box-sizing:border-box;padding:112px clamp(16px,4vw,48px) 0">
+  <div style="max-width:620px;display:flex;flex-direction:column;gap:12px">
+    <span style="font-size:12px;line-height:16px;font-weight:500;letter-spacing:0.01em;color:#6B625B">BUILT TO WAIT WELL</span>
+    <h2 style="margin:0;font-size:32px;line-height:38px;font-weight:700;letter-spacing:-0.02em">Anything slow gets a skeleton.</h2>
+    <p style="margin:0;color:#6B625B">Images, sections and whole pages show a placeholder while they load. Redis keeps sessions and cache outside the app, so you can run more than one copy.</p>
+  </div>
+  <div style="margin-top:32px;display:flex;flex-wrap:wrap;gap:24px;align-items:stretch">
+    <div class="el-glass" style="flex:1 1 400px;min-width:0;box-sizing:border-box;padding:32px;display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px">
+        <h3 style="margin:0;font-size:22px;line-height:28px;font-weight:600;letter-spacing:-0.01em">Businesses</h3>
+        <button class="el-btn el-primary" @click="vm.loadData">{{ vm.loadLabel }}</button>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;min-height:236px" aria-live="polite">
+        <template v-if="vm.loading">
+          <div class="skel" style="display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:12px;background:#FFFFFF;border:1px solid rgba(31,26,23,0.10)"><div style="width:40px;height:40px;border-radius:999px;background:#F3EEE8;flex:none"></div><div style="flex:1;display:flex;flex-direction:column;gap:8px"><div style="height:12px;width:55%;border-radius:6px;background:#F3EEE8"></div><div style="height:10px;width:35%;border-radius:6px;background:#F3EEE8"></div></div></div>
+          <div class="skel" style="animation-delay:.15s;display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:12px;background:#FFFFFF;border:1px solid rgba(31,26,23,0.10)"><div style="width:40px;height:40px;border-radius:999px;background:#F3EEE8;flex:none"></div><div style="flex:1;display:flex;flex-direction:column;gap:8px"><div style="height:12px;width:45%;border-radius:6px;background:#F3EEE8"></div><div style="height:10px;width:40%;border-radius:6px;background:#F3EEE8"></div></div></div>
+          <div class="skel" style="animation-delay:.3s;display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:12px;background:#FFFFFF;border:1px solid rgba(31,26,23,0.10)"><div style="width:40px;height:40px;border-radius:999px;background:#F3EEE8;flex:none"></div><div style="flex:1;display:flex;flex-direction:column;gap:8px"><div style="height:12px;width:62%;border-radius:6px;background:#F3EEE8"></div><div style="height:10px;width:30%;border-radius:6px;background:#F3EEE8"></div></div></div>
+          <span style="font-size:14px;line-height:20px;color:#6B625B">Loading…</span>
+        </template>
+        <template v-if="vm.loaded">
+          <template v-for="(r, i_r) in vm.rows" :key="i_r">
+            <div class="popin" :style="`display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:12px;background:#FFFFFF;border:1px solid rgba(31,26,23,0.10);animation-delay:${r.delay}`">
+              <div :style="`width:40px;height:40px;border-radius:999px;background:${r.color};color:${r.fg};display:flex;align-items:center;justify-content:center;font-weight:600;flex:none`">{{ r.initial }}</div>
+              <div style="flex:1;min-width:0;display:flex;flex-direction:column"><span style="font-size:16px;line-height:24px;font-weight:600">{{ r.name }}</span><span style="font-size:14px;line-height:20px;color:#6B625B">{{ r.meta }}</span></div>
+            </div>
+          </template>
+        </template>
+      </div>
+    </div>
+    <div class="el-glass" style="flex:1 1 400px;min-width:0;box-sizing:border-box;padding:32px;display:flex;flex-direction:column;gap:16px;justify-content:space-between">
+      <svg viewBox="0 0 480 300" width="100%" style="max-width:480px;height:auto;align-self:center" role="img" aria-label="Three app instances, shown as dots, sharing one Redis cache">
+        <path class="flowline" d="M86 70 C 200 70, 230 150, 322 150" fill="none" stroke="#F28A1E" stroke-width="3" stroke-linecap="round"></path>
+        <path class="flowline" d="M86 150 L 322 150" fill="none" stroke="#A63E8E" stroke-width="3" stroke-linecap="round" style="animation-delay:-.5s"></path>
+        <path class="flowline" d="M86 230 C 200 230, 230 150, 322 150" fill="none" stroke="#6A4CB5" stroke-width="3" stroke-linecap="round" style="animation-delay:-1s"></path>
+        <g class="fl1"><circle cx="60" cy="70" r="28" fill="#D9730A"></circle><circle cx="58" cy="68" r="25" fill="#F28A1E"></circle><ellipse cx="50" cy="59" rx="8" ry="4.5" fill="#FFFFFF" opacity="0.6" transform="rotate(-30 50 59)"></ellipse></g>
+        <g class="fl2"><circle cx="60" cy="150" r="28" fill="#86306F"></circle><circle cx="58" cy="148" r="25" fill="#A63E8E"></circle><ellipse cx="50" cy="139" rx="8" ry="4.5" fill="#FFFFFF" opacity="0.6" transform="rotate(-30 50 139)"></ellipse></g>
+        <g class="fl3"><circle cx="60" cy="230" r="28" fill="#54399A"></circle><circle cx="58" cy="228" r="25" fill="#6A4CB5"></circle><ellipse cx="50" cy="219" rx="8" ry="4.5" fill="#FFFFFF" opacity="0.6" transform="rotate(-30 50 219)"></ellipse></g>
+        <rect x="330" y="112" width="100" height="92" fill="#CE9610"></rect>
+        <ellipse cx="380" cy="204" rx="50" ry="16" fill="#CE9610"></ellipse>
+        <rect x="330" y="150" width="100" height="6" fill="#E3A715"></rect>
+        <rect x="330" y="176" width="100" height="6" fill="#E3A715"></rect>
+        <ellipse cx="380" cy="112" rx="50" ry="16" fill="#F6B81A"></ellipse>
+        <g class="fl4"><circle cx="380" cy="58" r="24" fill="#C8361F"></circle><path d="M387 42 L370 62 L381 62 L374 76 L392 55 L381 55 Z" fill="#FFFFFF"></path></g>
+      </svg>
+      <p style="margin:0;color:#6B625B;font-size:14px;line-height:20px">Redis is off by default so the scaffold runs anywhere. Set REDIS_ENABLED=true and REDIS_URL in .env before you run more than one instance.</p>
+    </div>
+  </div>
+</section>
+
+<!-- INSTALL -->
+<section id="install" style="position:relative;z-index:1;max-width:1200px;margin:0 auto;box-sizing:border-box;padding:112px clamp(16px,4vw,48px) 0">
+  <div style="max-width:620px;display:flex;flex-direction:column;gap:12px">
+    <span style="font-size:12px;line-height:16px;font-weight:500;letter-spacing:0.01em;color:#6B625B">INSTALL</span>
+    <h2 style="margin:0;font-size:32px;line-height:38px;font-weight:700;letter-spacing:-0.02em">Paste it into your agent.</h2>
+    <p style="margin:0;color:#6B625B">Choose your harness, copy the text and paste it in. Your agent clones the scaffold, links the skill and tells you how to start an app.</p>
+  </div>
+  <div style="margin-top:32px;display:flex;flex-wrap:wrap;gap:24px;align-items:stretch">
+    <div class="el-glass" style="flex:1.5 1 480px;min-width:0;box-sizing:border-box;padding:28px;display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;flex-wrap:wrap;gap:24px">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <span style="font-size:12px;line-height:16px;font-weight:500;letter-spacing:0.01em;color:#6B625B">YOUR HARNESS</span>
+          <div style="display:flex;flex-wrap:wrap;gap:8px" role="group" aria-label="Harness">
+            <template v-for="(h, i_h) in vm.harnesses" :key="i_h">
+              <button class="el-chip" @click="h.pick" :aria-pressed="h.selected" :style="h.style">{{ h.label }}</button>
+            </template>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <span style="font-size:12px;line-height:16px;font-weight:500;letter-spacing:0.01em;color:#6B625B">HOW</span>
+          <div style="display:flex;flex-wrap:wrap;gap:8px" role="group" aria-label="Method">
+            <button class="el-chip" @click="vm.pickPaste" :aria-pressed="vm.isPaste" :style="vm.pasteStyle">Paste into your agent</button>
+            <button class="el-chip" @click="vm.pickTerminal" :aria-pressed="vm.isTerminal" :style="vm.terminalStyle">Run in a terminal</button>
+          </div>
+        </div>
+      </div>
+      <div style="border-radius:12px;background:#FFFFFF;border:1px solid rgba(31,26,23,0.10);overflow:hidden">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 8px 8px 16px;background:#F3EEE8;border-bottom:1px solid rgba(31,26,23,0.10)">
+          <span style="font-size:14px;line-height:20px;font-weight:500">{{ vm.installTitle }}</span>
+          <button class="el-btn el-primary" @click="vm.copyInstall" style="min-width:112px" aria-live="polite">{{ vm.installCopyLabel }}</button>
+        </div>
+        <code style="display:block;box-sizing:border-box;padding:16px;font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:13px;line-height:20px;white-space:pre-wrap;overflow-wrap:anywhere">{{ vm.installText }}</code>
+      </div>
+      <p style="margin:0;font-size:14px;line-height:20px;color:#6B625B">{{ vm.installNote }}</p>
+    </div>
+    <div style="flex:1 1 340px;min-width:0;display:flex;flex-direction:column;gap:24px">
+      <div class="el-glass" style="box-sizing:border-box;padding:28px;display:flex;flex-direction:column;gap:16px">
+        <h3 style="margin:0;font-size:22px;line-height:28px;font-weight:600;letter-spacing:-0.01em">What it does</h3>
+        <div style="display:flex;align-items:flex-start;gap:12px"><span style="width:28px;height:28px;border-radius:999px;background:#F28A1E;color:#1F1A17;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;flex:none">1</span><span>Clones the scaffold into ~/.ellipsis, or pulls it if it's already there.</span></div>
+        <div style="display:flex;align-items:flex-start;gap:12px"><span style="width:28px;height:28px;border-radius:999px;background:#A63E8E;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;flex:none">2</span><span>Links the ellipsis skill into your harness's skills folder.</span></div>
+        <div style="display:flex;align-items:flex-start;gap:12px"><span style="width:28px;height:28px;border-radius:999px;background:#6A4CB5;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;flex:none">3</span><span>Adds ELLIPSIS_REPO to your shell profile so the skill can pull the latest scaffold.</span></div>
+        <div style="display:flex;align-items:flex-start;gap:12px"><span style="width:28px;height:28px;border-radius:999px;background:#4466C0;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;flex:none">4</span><span>Start a new session, then ask for your first app.</span></div>
+      </div>
+      <div class="el-glass" style="box-sizing:border-box;padding:28px;display:flex;flex-direction:column;gap:12px">
+        <h3 style="margin:0;font-size:22px;line-height:28px;font-weight:600;letter-spacing:-0.01em">Then start an app</h3>
+        <div style="display:flex;align-items:center;gap:8px;padding:8px 8px 8px 14px;border-radius:12px;background:#FFFFFF;border:1px solid rgba(31,26,23,0.10)">
+          <code style="flex:1;min-width:0;font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:13px;line-height:20px;overflow-x:auto;white-space:nowrap">build me an ellipsis app called my-app</code>
+          <button class="el-btn el-secondary" @click="vm.copyStart" style="flex:none;min-width:88px;padding:0 14px" aria-live="polite">{{ vm.startCopyLabel }}</button>
+        </div>
+        <p style="margin:0;font-size:14px;line-height:20px;color:#6B625B">Or run /ellipsis. To update later, run git -C ~/.ellipsis pull.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUICKSTART -->
+<section id="quickstart" style="position:relative;z-index:1;max-width:1200px;margin:0 auto;box-sizing:border-box;padding:112px clamp(16px,4vw,48px) 0">
+  <div style="max-width:620px;display:flex;flex-direction:column;gap:12px">
+    <span style="font-size:12px;line-height:16px;font-weight:500;letter-spacing:0.01em;color:#6B625B">QUICKSTART</span>
+    <h2 style="margin:0;font-size:32px;line-height:38px;font-weight:700;letter-spacing:-0.02em">Four commands to a running app.</h2>
+    <p style="margin:0;color:#6B625B">Step through it here. After you've cloned the repository, run these in the folder.</p>
+  </div>
+  <div style="margin-top:32px;display:flex;flex-wrap:wrap;gap:24px;align-items:stretch">
+    <div class="el-glass" style="flex:1.3 1 460px;min-width:0;box-sizing:border-box;padding:28px;display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;flex-direction:column;border-radius:12px;overflow:hidden;background:#FFFFFF;border:1px solid rgba(31,26,23,0.10)">
+        <template v-for="(s, i_s) in vm.steps" :key="i_s">
+          <div :style="`display:flex;flex-direction:column;gap:6px;padding:14px 16px;border-top:1px solid rgba(31,26,23,0.10);background:${s.bg};opacity:${s.op};transition:opacity .3s,background .3s`">
+            <div style="display:flex;align-items:center;gap:10px">
+              <span style="font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:13px;line-height:20px;color:#6B625B;flex:none">$</span>
+              <code style="font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:13px;line-height:20px;overflow-x:auto;white-space:nowrap;min-width:0">{{ s.cmd }}</code>
+            </div>
+            <template v-if="s.done">
+              <div class="popin" style="display:flex;align-items:center;gap:8px;font-size:14px;line-height:20px;font-weight:500;color:#187A42;padding-left:20px">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#187A42" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
+                <span>Done: {{ s.result }}</span>
+              </div>
+            </template>
+          </div>
+        </template>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+        <button class="el-btn el-primary" @click="vm.nextStep">{{ vm.stepLabel }}</button>
+        <button class="el-btn el-secondary" @click="vm.resetSteps">Reset</button>
+        <span style="font-size:14px;line-height:20px;color:#6B625B" aria-live="polite">{{ vm.stepCount }}</span>
+      </div>
+    </div>
+    <div class="el-glass" style="flex:1 1 320px;min-width:0;box-sizing:border-box;padding:28px;display:flex;flex-direction:column;gap:16px;align-items:center;justify-content:center;text-align:center;min-height:300px">
+      <template v-if="vm.alive">
+        <div class="popin" style="width:100%;max-width:340px;border-radius:12px;background:#FFFFFF;border:1px solid rgba(31,26,23,0.10);overflow:hidden">
+          <div style="display:flex;align-items:center;gap:6px;padding:10px 14px;background:#F3EEE8;border-bottom:1px solid rgba(31,26,23,0.10)">
+            <span style="width:8px;height:8px;border-radius:999px;background:#F28A1E"></span><span style="width:8px;height:8px;border-radius:999px;background:#A63E8E"></span><span style="width:8px;height:8px;border-radius:999px;background:#6A4CB5"></span>
+            <code style="font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:12px;line-height:16px;color:#6B625B;margin-left:8px">127.0.0.1:5000</code>
+          </div>
+          <div style="padding:36px 20px;display:flex;flex-direction:column;align-items:center;gap:16px">
+            <div style="display:flex;gap:10px"><span class="hop" style="background:#F28A1E"></span><span class="hop" style="background:#A63E8E;animation-delay:.15s"></span><span class="hop" style="background:#6A4CB5;animation-delay:.3s"></span></div>
+            <span style="font-size:22px;line-height:28px;font-weight:600;letter-spacing:-0.01em">It's alive.</span>
+            <span style="font-size:14px;line-height:20px;color:#6B625B">Your app is serving on port 5000.</span>
+          </div>
+        </div>
+      </template>
+      <template v-if="vm.waiting">
+        <div style="display:flex;gap:10px"><span class="dot" style="background:#F28A1E"></span><span class="dot" style="background:#A63E8E;animation-delay:.2s"></span><span class="dot" style="background:#6A4CB5;animation-delay:.4s"></span></div>
+        <span style="font-size:14px;line-height:20px;color:#6B625B;max-width:240px">Run all four steps and your app appears here.</span>
+      </template>
+    </div>
+  </div>
+</section>
+
+<!-- SKILL -->
+<section id="skill" style="position:relative;z-index:1;max-width:1200px;margin:0 auto;box-sizing:border-box;padding:112px clamp(16px,4vw,48px) 0">
+  <div style="display:flex;flex-wrap:wrap;gap:32px;align-items:center">
+    <div style="flex:1 1 320px;min-width:0;display:flex;justify-content:center">
+      <svg viewBox="0 0 400 400" width="100%" style="max-width:400px;height:auto" role="img" aria-label="A friendly spellbook with a glowing star, orbited by three dots">
+        <circle cx="200" cy="200" r="130" fill="none" stroke="#1F1A17" stroke-opacity="0.14" stroke-width="2" stroke-dasharray="4 8"></circle>
+        <circle cx="200" cy="200" r="168" fill="none" stroke="#1F1A17" stroke-opacity="0.08" stroke-width="2" stroke-dasharray="4 10"></circle>
+        <g class="orbit">
+          <circle cx="330" cy="200" r="20" fill="#D9730A"></circle><circle cx="328" cy="198" r="17.5" fill="#F28A1E"></circle>
+          <circle cx="135" cy="312.6" r="20" fill="#86306F"></circle><circle cx="133" cy="310.6" r="17.5" fill="#A63E8E"></circle>
+          <circle cx="135" cy="87.4" r="20" fill="#54399A"></circle><circle cx="133" cy="85.4" r="17.5" fill="#6A4CB5"></circle>
+        </g>
+        <g class="fl1">
+          <rect x="144" y="150" width="112" height="132" rx="16" fill="#86306F"></rect>
+          <rect x="144" y="146" width="112" height="132" rx="16" fill="#A63E8E"></rect>
+          <rect x="158" y="146" width="10" height="132" fill="#86306F" opacity="0.5"></rect>
+          <rect x="182" y="168" width="52" height="8" rx="4" fill="#FFFFFF" opacity="0.85"></rect>
+          <rect x="182" y="186" width="38" height="8" rx="4" fill="#FFFFFF" opacity="0.55"></rect>
+          <path d="M226 146 L226 200 L238 190 L250 200 L250 146 Z" fill="#F6B81A"></path>
+          <path class="tw" d="M0 -22 L5 -5 L22 0 L5 5 L0 22 L-5 5 L-22 0 L-5 -5 Z" fill="#F6B81A" transform="translate(200 108)"></path>
+        </g>
+        <path class="tw" d="M0 -8 L2 -2 L8 0 L2 2 L0 8 L-2 2 L-8 0 L-2 -2 Z" fill="#E0402A" transform="translate(300 90)" style="animation-delay:1s"></path>
+        <path class="tw" d="M0 -8 L2 -2 L8 0 L2 2 L0 8 L-2 2 L-8 0 L-2 -2 Z" fill="#4466C0" transform="translate(96 250)" style="animation-delay:1.7s"></path>
+      </svg>
+    </div>
+    <div style="flex:1.3 1 420px;min-width:0;display:flex;flex-direction:column;gap:16px">
+      <span style="font-size:12px;line-height:16px;font-weight:500;letter-spacing:0.01em;color:#6B625B">AGENT SKILL</span>
+      <h2 style="margin:0;font-size:32px;line-height:38px;font-weight:700;letter-spacing:-0.02em">Also a skill your agent can use.</h2>
+      <p style="margin:0;color:#6B625B">Ellipsis is both this repository and an agent skill. Run /ellipsis, or say &ldquo;build me an ellipsis app called…&rdquo;. It starts from the scaffold when it can reach it, and rebuilds the same structure from its own notes when it can't.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px">
+        <a class="el-btn el-primary" href="#install">Install the skill</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="position:relative;z-index:1;max-width:1200px;margin:0 auto;box-sizing:border-box;padding:112px clamp(16px,4vw,48px) 0">
+  <div class="el-glass" style="box-sizing:border-box;padding:48px clamp(20px,4vw,48px);display:flex;flex-wrap:wrap;gap:32px;align-items:center;justify-content:center;text-align:left;overflow:hidden">
+    <div style="flex:1 1 360px;min-width:0;display:flex;flex-direction:column;gap:20px;align-items:flex-start">
+      <h2 style="margin:0;font-size:clamp(32px,4.4vw,44px);line-height:1.1;font-weight:700;letter-spacing:-0.03em">Your app goes here<span style="display:inline-flex;gap:5px;margin-left:8px"><span class="dot" style="width:11px;height:11px;background:#F28A1E"></span><span class="dot" style="width:11px;height:11px;background:#A63E8E;animation-delay:.2s"></span><span class="dot" style="width:11px;height:11px;background:#6A4CB5;animation-delay:.4s"></span></span></h2>
+      <p style="margin:0;color:#6B625B;max-width:440px">The name is the three dots you type when something is still to come. The scaffold is ready. The rest is yours.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px">
+        <a class="el-btn el-primary" href="https://github.com/djynnius/ellipsis-core">Get the scaffold</a>
+        <a class="el-btn el-secondary" href="#quickstart">Back to quickstart</a>
+      </div>
+    </div>
+    <div style="flex:1 1 360px;min-width:0;display:flex;justify-content:center">
+      <svg viewBox="0 0 640 380" width="100%" style="max-width:520px;height:auto" role="img" aria-label="A rainbow arch of warm colours with three glossy dots resting on top">
+        <path d="M 70 340 A 250 250 0 0 1 570 340" fill="none" stroke="#E0402A" stroke-width="22"></path>
+        <path d="M 93 340 A 227 227 0 0 1 547 340" fill="none" stroke="#F28A1E" stroke-width="22"></path>
+        <path d="M 116 340 A 204 204 0 0 1 524 340" fill="none" stroke="#F6B81A" stroke-width="22"></path>
+        <path d="M 139 340 A 181 181 0 0 1 501 340" fill="none" stroke="#649D2B" stroke-width="22"></path>
+        <path d="M 162 340 A 158 158 0 0 1 478 340" fill="none" stroke="#4466C0" stroke-width="22"></path>
+        <path d="M 185 340 A 135 135 0 0 1 455 340" fill="none" stroke="#6A4CB5" stroke-width="22"></path>
+        <path d="M 208 340 A 112 112 0 0 1 432 340" fill="none" stroke="#A63E8E" stroke-width="22"></path>
+        <ellipse cx="320" cy="358" rx="240" ry="12" fill="#1F1A17" opacity="0.07"></ellipse>
+        <g class="fl1"><circle cx="262" cy="52" r="24" fill="#D9730A"></circle><circle cx="260" cy="50" r="21" fill="#F28A1E"></circle><ellipse cx="252" cy="42" rx="7" ry="4" fill="#FFFFFF" opacity="0.6" transform="rotate(-30 252 42)"></ellipse></g>
+        <g class="fl2"><circle cx="320" cy="40" r="24" fill="#86306F"></circle><circle cx="318" cy="38" r="21" fill="#A63E8E"></circle><ellipse cx="310" cy="30" rx="7" ry="4" fill="#FFFFFF" opacity="0.6" transform="rotate(-30 310 30)"></ellipse></g>
+        <g class="fl3"><circle cx="378" cy="52" r="24" fill="#54399A"></circle><circle cx="376" cy="50" r="21" fill="#6A4CB5"></circle><ellipse cx="368" cy="42" rx="7" ry="4" fill="#FFFFFF" opacity="0.6" transform="rotate(-30 368 42)"></ellipse></g>
+        <path class="tw" d="M0 -9 L2.4 -2.4 L9 0 L2.4 2.4 L0 9 L-2.4 2.4 L-9 0 L-2.4 -2.4 Z" fill="#F6B81A" transform="translate(440 70)"></path>
+        <path class="tw" d="M0 -9 L2.4 -2.4 L9 0 L2.4 2.4 L0 9 L-2.4 2.4 L-9 0 L-2.4 -2.4 Z" fill="#E0402A" transform="translate(196 84)" style="animation-delay:1.2s"></path>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="position:relative;z-index:1;max-width:1200px;margin:0 auto;box-sizing:border-box;padding:48px clamp(16px,4vw,48px) 40px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px">
+  <div style="display:flex;align-items:center;gap:12px">
+    <svg viewBox="0 0 88 24" width="44" height="12" role="img" aria-label="Ellipsis Core mark"><circle cx="12" cy="12" r="12" fill="#F28A1E"></circle><circle cx="44" cy="12" r="12" fill="#A63E8E"></circle><circle cx="76" cy="12" r="12" fill="#6A4CB5"></circle></svg>
+    <span style="font-size:14px;line-height:20px;color:#6B625B">A scaffold for Python Flask apps.</span>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:4px">
+    <a href="https://github.com/djynnius/ellipsis-core" style="display:inline-flex;align-items:center;min-height:44px;padding:0 12px;font-size:14px;font-weight:500;text-decoration:none">GitHub</a>
+    <a href="#stack" style="display:inline-flex;align-items:center;min-height:44px;padding:0 12px;font-size:14px;font-weight:500;text-decoration:none">What's inside</a>
+    <a href="#install" style="display:inline-flex;align-items:center;min-height:44px;padding:0 12px;font-size:14px;font-weight:500;text-decoration:none">Install</a>
+    <a href="#quickstart" style="display:inline-flex;align-items:center;min-height:44px;padding:0 12px;font-size:14px;font-weight:500;text-decoration:none">Quickstart</a>
+    <a href="#top" style="display:inline-flex;align-items:center;min-height:44px;padding:0 12px;font-size:14px;font-weight:500;text-decoration:none">Back to top</a>
+  </div>
+</footer>
+
+</div>
+
+<script src="assets/scripts/vendor/vue.global.prod.js"></script>
+<script src="assets/scripts/app.js"></script>
+</body>
+</html>
