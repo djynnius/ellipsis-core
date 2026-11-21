@@ -1,6 +1,6 @@
 ---
-name: ellipsis
-description: Scaffold and build Python Flask apps on the ellipsis structure (Flask blueprints, plain SQLAlchemy, Alembic, Jinja2 views, Vue.js, skeleton.js loading placeholders, Redis sessions and cache, config.yaml, pytest). Use when the user runs /ellipsis, asks for an "ellipsis app" (including the misspelling "elipsis"), wants a new Flask app in their standard layout, or is adding routes, models, views or migrations to an app that already follows this layout.
+name: ellipsis-core
+description: Scaffold and build Python Flask apps on the ellipsis structure (Flask blueprints, plain SQLAlchemy, Alembic, Jinja2 views, Vue.js, skeleton.js loading placeholders, Redis sessions and cache, config.yaml, pytest). Use when the user runs /ellipsis-core, asks for an "ellipsis app" (including the misspelling "elipsis"), wants a new Flask app in their standard layout, or is adding routes, models, views or migrations to an app that already follows this layout.
 ---
 
 # ellipsis

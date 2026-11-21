@@ -141,8 +141,8 @@
     }));
 
     // ---- skill
-    const agentText = 'Install the ellipsis skill for me:\n1. Clone https://github.com/djynnius/ellipsis-core.git into ~/.ellipsis (git pull if it is already there).\n2. Symlink ~/.ellipsis/skills/ellipsis into your skills directory as "ellipsis".\n3. Add export ELLIPSIS_REPO=https://github.com/djynnius/ellipsis-core.git to my shell profile.\n4. Confirm SKILL.md is readable, then tell me how to start a new ellipsis app.';
-    const diyText = 'git clone https://github.com/djynnius/ellipsis-core.git ~/.ellipsis\n\n# Claude Code\nmkdir -p ~/.claude/skills\nln -sfn ~/.ellipsis/skills/ellipsis ~/.claude/skills/ellipsis\n\n# lets the skill pull the latest scaffold\necho \'export ELLIPSIS_REPO=https://github.com/djynnius/ellipsis-core.git\' >> ~/.bashrc';
+    const agentText = 'Install the ellipsis-core skill for me:\n1. Clone https://github.com/djynnius/ellipsis-core.git into ~/.ellipsis (git pull if it is already there).\n2. Symlink ~/.ellipsis/skills/ellipsis-core into your skills directory as "ellipsis-core".\n3. Add export ELLIPSIS_REPO=https://github.com/djynnius/ellipsis-core.git to my shell profile.\n4. Confirm SKILL.md is readable, then tell me how to start a new ellipsis app.';
+    const diyText = 'git clone https://github.com/djynnius/ellipsis-core.git ~/.ellipsis\n\n# Claude Code\nmkdir -p ~/.claude/skills\nln -sfn ~/.ellipsis/skills/ellipsis-core ~/.claude/skills/ellipsis-core\n\n# lets the skill pull the latest scaffold\necho \'export ELLIPSIS_REPO=https://github.com/djynnius/ellipsis-core.git\' >> ~/.bashrc';
     const pillStyle = (on) => 'display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;box-sizing:border-box;font:500 14px/20px Inter,-apple-system,system-ui,sans-serif;'
       + (on ? 'background:#1F1A17;color:#FBF8F4;border:1px solid #1F1A17;' : 'background:#FFFFFF;color:#1F1A17;border:1px solid rgba(31,26,23,0.10);');
 
@@ -159,17 +159,17 @@
     const dir = hd.dir;
     const dirWords = s.harness === 'other' ? 'your own skills directory (most harnesses read ~/.agents/skills)' : dir;
     const step2 = hd.link
-      ? '2. Symlink ~/.ellipsis/skills/ellipsis into ' + dirWords + ' as "ellipsis". Create the skills directory if it does not exist.\n'
-      : '2. Copy ~/.ellipsis/skills/ellipsis into ' + dirWords + ' as "ellipsis". Copy it rather than symlinking, since symlinked skills may not be picked up. Create the skills directory if it does not exist.\n';
-    const pasteText = 'Install the ellipsis skill for me:\n'
+      ? '2. Symlink ~/.ellipsis/skills/ellipsis-core into ' + dirWords + ' as "ellipsis-core". Create the skills directory if it does not exist.\n'
+      : '2. Copy ~/.ellipsis/skills/ellipsis-core into ' + dirWords + ' as "ellipsis-core". Copy it rather than symlinking, since symlinked skills may not be picked up. Create the skills directory if it does not exist.\n';
+    const pasteText = 'Install the ellipsis-core skill for me:\n'
       + '1. Clone ' + repo + ' into ~/.ellipsis (if it is already there, run git pull in it instead).\n'
       + step2
       + '3. Add this line to my shell profile if it is not already there: export ELLIPSIS_REPO=' + repo + '\n'
       + '4. Confirm that SKILL.md is readable in the skills directory, then tell me how to start a new ellipsis app.';
     const terminalText = 'git clone ' + repo + ' ~/.ellipsis\n\n'
       + (hd.link
-        ? 'mkdir -p ' + dir + ' && ln -sfn ~/.ellipsis/skills/ellipsis ' + dir + '/ellipsis\n\n'
-        : 'mkdir -p ' + dir + ' && rm -rf ' + dir + '/ellipsis && cp -R ~/.ellipsis/skills/ellipsis ' + dir + '/ellipsis\n\n')
+        ? 'mkdir -p ' + dir + ' && ln -sfn ~/.ellipsis/skills/ellipsis-core ' + dir + '/ellipsis-core\n\n'
+        : 'mkdir -p ' + dir + ' && rm -rf ' + dir + '/ellipsis-core && cp -R ~/.ellipsis/skills/ellipsis-core ' + dir + '/ellipsis-core\n\n')
       + '# lets the skill pull the latest scaffold when it starts a new app\n'
       + 'echo \'export ELLIPSIS_REPO=' + repo + '\' >> ~/.bashrc   # or ~/.zshrc';
     const installText = s.method === 'paste' ? pasteText : terminalText;

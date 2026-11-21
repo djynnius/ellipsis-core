@@ -14,16 +14,16 @@ A scaffold for Python Flask apps: one fixed layout, with the pieces every app en
 - **Socket.IO** baked in but commented out
 - **pytest** unit tests
 
-ellipsis is both this repository and an agent skill (`skills/ellipsis`). The skill starts a new app from this repository when it can reach it, and rebuilds the same structure from its own notes when it cannot.
+ellipsis is both this repository and an agent skill (`skills/ellipsis-core`). The skill starts a new app from this repository when it can reach it, and rebuilds the same structure from its own notes when it cannot.
 
 ## Install the skill
 
 **Option 1: ask your agent.** Paste this into Claude Code, Codex, or any harness that supports skills:
 
 ```text
-Install the ellipsis skill for me:
+Install the ellipsis-core skill for me:
 1. Clone https://github.com/djynnius/ellipsis-core.git into ~/.ellipsis (if it is already there, run git pull in it instead).
-2. Symlink ~/.ellipsis/skills/ellipsis into your own skills directory as "ellipsis" (for Claude Code that is ~/.claude/skills/, for Codex and most other harnesses ~/.agents/skills/). Create the skills directory if it does not exist.
+2. Symlink ~/.ellipsis/skills/ellipsis-core into your own skills directory as "ellipsis-core" (for Claude Code that is ~/.claude/skills/, for Codex and most other harnesses ~/.agents/skills/). Create the skills directory if it does not exist.
 3. Add this line to my shell profile if it is not already there: export ELLIPSIS_REPO=https://github.com/djynnius/ellipsis-core.git
 4. Confirm that SKILL.md is readable through the symlink, then tell me how to start a new ellipsis app.
 ```
@@ -34,18 +34,18 @@ Install the ellipsis skill for me:
 git clone https://github.com/djynnius/ellipsis-core.git ~/.ellipsis
 
 # Claude Code
-mkdir -p ~/.claude/skills && ln -sfn ~/.ellipsis/skills/ellipsis ~/.claude/skills/ellipsis
+mkdir -p ~/.claude/skills && ln -sfn ~/.ellipsis/skills/ellipsis-core ~/.claude/skills/ellipsis-core
 
 # Codex and other harnesses that read ~/.agents/skills
-mkdir -p ~/.agents/skills && ln -sfn ~/.ellipsis/skills/ellipsis ~/.agents/skills/ellipsis
+mkdir -p ~/.agents/skills && ln -sfn ~/.ellipsis/skills/ellipsis-core ~/.agents/skills/ellipsis-core
 
 # Lets the skill pull the latest scaffold when it starts a new app
 echo 'export ELLIPSIS_REPO=https://github.com/djynnius/ellipsis-core.git' >> ~/.bashrc   # or ~/.zshrc
 ```
 
-Start a new session in your harness, then run `/ellipsis` or say "build me an ellipsis app called ...". To update the skill later, run `git -C ~/.ellipsis pull`.
+Start a new session in your harness, then run `/ellipsis-core` or say "build me an ellipsis app called ...". To update the skill later, run `git -C ~/.ellipsis pull`.
 
-The clone in `~/.ellipsis` doubles as the offline copy of the scaffold: with no connection the skill copies from it, and with no clone at all it rebuilds the structure from `skills/ellipsis/references/architecture.md`.
+The clone in `~/.ellipsis` doubles as the offline copy of the scaffold: with no connection the skill copies from it, and with no clone at all it rebuilds the structure from `skills/ellipsis-core/references/architecture.md`.
 
 ## Use the scaffold directly
 
@@ -93,7 +93,7 @@ ellipsis-core/
 ├── uploads/                # files users upload (contents gitignored)
 ├── downloads/              # files offered for download (contents gitignored)
 ├── unit_tests/             # pytest
-├── skills/ellipsis/        # the agent skill
+├── skills/ellipsis-core/   # the agent skill
 └── ellipsis-core-site/     # the public site, published to GitHub Pages
 ```
 

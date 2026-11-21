@@ -344,7 +344,7 @@
       <div class="el-glass" style="box-sizing:border-box;padding:28px;display:flex;flex-direction:column;gap:16px">
         <h3 style="margin:0;font-size:22px;line-height:28px;font-weight:600;letter-spacing:-0.01em">What it does</h3>
         <div style="display:flex;align-items:flex-start;gap:12px"><span style="width:28px;height:28px;border-radius:999px;background:#F28A1E;color:#1F1A17;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;flex:none">1</span><span>Clones the scaffold into ~/.ellipsis, or pulls it if it's already there.</span></div>
-        <div style="display:flex;align-items:flex-start;gap:12px"><span style="width:28px;height:28px;border-radius:999px;background:#A63E8E;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;flex:none">2</span><span>Links the ellipsis skill into your harness's skills folder.</span></div>
+        <div style="display:flex;align-items:flex-start;gap:12px"><span style="width:28px;height:28px;border-radius:999px;background:#A63E8E;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;flex:none">2</span><span>Links the ellipsis-core skill into your harness's skills folder.</span></div>
         <div style="display:flex;align-items:flex-start;gap:12px"><span style="width:28px;height:28px;border-radius:999px;background:#6A4CB5;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;flex:none">3</span><span>Adds ELLIPSIS_REPO to your shell profile so the skill can pull the latest scaffold.</span></div>
         <div style="display:flex;align-items:flex-start;gap:12px"><span style="width:28px;height:28px;border-radius:999px;background:#4466C0;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;flex:none">4</span><span>Start a new session, then ask for your first app.</span></div>
       </div>
@@ -354,7 +354,7 @@
           <code style="flex:1;min-width:0;font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:13px;line-height:20px;overflow-x:auto;white-space:nowrap">build me an ellipsis app called my-app</code>
           <button class="el-btn el-secondary" @click="vm.copyStart" style="flex:none;min-width:88px;padding:0 14px" aria-live="polite">{{ vm.startCopyLabel }}</button>
         </div>
-        <p style="margin:0;font-size:14px;line-height:20px;color:#6B625B">Or run /ellipsis. To update later, run git -C ~/.ellipsis pull.</p>
+        <p style="margin:0;font-size:14px;line-height:20px;color:#6B625B">Or run /ellipsis-core. To update later, run git -C ~/.ellipsis pull.</p>
       </div>
     </div>
   </div>
@@ -441,7 +441,7 @@
     <div style="flex:1.3 1 420px;min-width:0;display:flex;flex-direction:column;gap:16px">
       <span style="font-size:12px;line-height:16px;font-weight:500;letter-spacing:0.01em;color:#6B625B">AGENT SKILL</span>
       <h2 style="margin:0;font-size:32px;line-height:38px;font-weight:700;letter-spacing:-0.02em">Also a skill your agent can use.</h2>
-      <p style="margin:0;color:#6B625B">Ellipsis is both this repository and an agent skill. Run /ellipsis, or say &ldquo;build me an ellipsis app called…&rdquo;. It starts from the scaffold when it can reach it, and rebuilds the same structure from its own notes when it can't.</p>
+      <p style="margin:0;color:#6B625B">Ellipsis is both this repository and an agent skill. Run /ellipsis-core, or say &ldquo;build me an ellipsis app called…&rdquo;. It starts from the scaffold when it can reach it, and rebuilds the same structure from its own notes when it can't.</p>
       <div style="display:flex;flex-wrap:wrap;gap:12px">
         <a class="el-btn el-primary" href="#install">Install the skill</a>
       </div>
