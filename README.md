@@ -1,4 +1,4 @@
-# ellipsis
+# ellipsis-core
 
 A scaffold for Python Flask apps: one fixed layout, with the pieces every app ends up needing already wired together.
 
@@ -20,16 +20,16 @@ ellipsis is both this repository and an agent skill (`skills/ellipsis`). The ski
 
 ```text
 Install the ellipsis skill for me:
-1. Clone https://github.com/djynnius/ellipsis.git into ~/.ellipsis (if it is already there, run git pull in it instead).
+1. Clone https://github.com/djynnius/ellipsis-core.git into ~/.ellipsis (if it is already there, run git pull in it instead).
 2. Symlink ~/.ellipsis/skills/ellipsis into your own skills directory as "ellipsis" (for Claude Code that is ~/.claude/skills/, for Codex and most other harnesses ~/.agents/skills/). Create the skills directory if it does not exist.
-3. Add this line to my shell profile if it is not already there: export ELLIPSIS_REPO=https://github.com/djynnius/ellipsis.git
+3. Add this line to my shell profile if it is not already there: export ELLIPSIS_REPO=https://github.com/djynnius/ellipsis-core.git
 4. Confirm that SKILL.md is readable through the symlink, then tell me how to start a new ellipsis app.
 ```
 
 **Option 2: run it yourself.** Paste this into a terminal:
 
 ```bash
-git clone https://github.com/djynnius/ellipsis.git ~/.ellipsis
+git clone https://github.com/djynnius/ellipsis-core.git ~/.ellipsis
 
 # Claude Code
 mkdir -p ~/.claude/skills && ln -sfn ~/.ellipsis/skills/ellipsis ~/.claude/skills/ellipsis
@@ -38,7 +38,7 @@ mkdir -p ~/.claude/skills && ln -sfn ~/.ellipsis/skills/ellipsis ~/.claude/skill
 mkdir -p ~/.agents/skills && ln -sfn ~/.ellipsis/skills/ellipsis ~/.agents/skills/ellipsis
 
 # Lets the skill pull the latest scaffold when it starts a new app
-echo 'export ELLIPSIS_REPO=https://github.com/djynnius/ellipsis.git' >> ~/.bashrc   # or ~/.zshrc
+echo 'export ELLIPSIS_REPO=https://github.com/djynnius/ellipsis-core.git' >> ~/.bashrc   # or ~/.zshrc
 ```
 
 Start a new session in your harness, then run `/ellipsis` or say "build me an ellipsis app called ...". To update the skill later, run `git -C ~/.ellipsis pull`.
@@ -60,7 +60,7 @@ uv run pytest
 ## Structure
 
 ```
-ellipsis/
+ellipsis-core/
 ├── app.py                  # create_app(): config, database, Redis, blueprints
 ├── config.yaml             # settings; ${VAR:default} slots are filled from .env
 ├── .env.example            # copy to .env (gitignored)
