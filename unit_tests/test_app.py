@@ -1,3 +1,6 @@
+from pathlib import Path
+
+
 def test_home_page_renders(client):
     response = client.get("/")
     assert response.status_code == 200
@@ -26,3 +29,11 @@ def test_storage_folders_are_configured(app):
     assert app.config["UPLOAD_FOLDER"].endswith("uploads")
     assert app.config["DOWNLOAD_FOLDER"].endswith("downloads")
     assert app.config["MAX_CONTENT_LENGTH"] == 16 * 1024 * 1024
+
+
+def test_storage_folders_hold_an_ellipsis_placeholder(app):
+    for key in ("UPLOAD_FOLDER", "DOWNLOAD_FOLDER"):
+        folder = Path(app.config[key])
+        assert (folder / ".ellipsis").is_file(), folder
+        # The folder's own .gitignore must let the placeholder through.
+        assert "!.ellipsis" in (folder / ".gitignore").read_text().splitlines(), folder

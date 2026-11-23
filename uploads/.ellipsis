@@ -1,0 +1,2 @@
+# uploads/: files users upload, saved through app.config["UPLOAD_FOLDER"].
+# Everything else placed here is gitignored; this file keeps the folder in git.

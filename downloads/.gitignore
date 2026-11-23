@@ -1,3 +1,4 @@
 # Keep this folder in git, ignore everything placed in it.
 *
 !.gitignore
+!.ellipsis

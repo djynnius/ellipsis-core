@@ -58,6 +58,8 @@ Folder names are fixed. Empty folders that must exist in git hold a `.gitkeep` (
 !.gitignore
 ```
 
+`uploads/` and `downloads/` also hold a `.ellipsis` placeholder, a two-line comment naming the folder's purpose and its `app.config` key (`UPLOAD_FOLDER`, `DOWNLOAD_FOLDER`). Their `.gitignore` adds `!.ellipsis` so it stays tracked.
+
 ## 2. Dependencies and project files
 
 `pyproject.toml`: `requires-python = ">=3.11"`; dependencies `flask>=3.0`, `sqlalchemy>=2.0`, `alembic>=1.13`, `pyyaml>=6.0`, `python-dotenv>=1.0`, `redis>=5.0`, `flask-session>=0.8`, and `flask-socketio>=5.3` present but commented out. Dev group: `pytest>=8.0`. Also:

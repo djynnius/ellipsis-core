@@ -14,7 +14,7 @@ An existing ellipsis app is recognisable by `app.py`, `config.yaml`, and the fol
 Ask for the app name and target folder only if the request does not make them clear. Then get the scaffold from the first source that works:
 
 1. **The git repository.** If `ELLIPSIS_REPO` is set, run `git clone --depth 1 "$ELLIPSIS_REPO" <target>`. This is the preferred source because it is the most current.
-2. **A local checkout.** This skill is often a symlink into a checkout of the repository. Resolve this skill folder's real path; if two levels up there is an `app.py` and a `config.yaml`, copy that folder to the target, leaving out `.git`, `.venv`, `.env`, `__pycache__`, `.pytest_cache` and the contents of `databases/`, `uploads/` and `downloads/` other than their `.gitignore`.
+2. **A local checkout.** This skill is often a symlink into a checkout of the repository. Resolve this skill folder's real path; if two levels up there is an `app.py` and a `config.yaml`, copy that folder to the target, leaving out `.git`, `.venv`, `.env`, `__pycache__`, `.pytest_cache` and the contents of `databases/`, `uploads/` and `downloads/` other than their `.gitignore` and `.ellipsis` files.
 3. **From scratch.** With no repository and no checkout, build the structure yourself from `references/architecture.md`, which describes every file and its contract. Read it in full first. Fetch Vue from `https://unpkg.com/vue@3/dist/vue.global.prod.js` into `assets/scripts/vendor/`; if there is no network at all, leave a note in the README that the file must be added and carry on.
 
 If `ELLIPSIS_REPO` is not set and you fell through to 2 or 3, say so in your final message so the user can set it.

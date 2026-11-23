@@ -1,0 +1,2 @@
+# downloads/: files the app offers for download, saved through app.config["DOWNLOAD_FOLDER"].
+# Everything else placed here is gitignored; this file keeps the folder in git.
