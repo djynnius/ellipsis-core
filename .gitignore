@@ -5,3 +5,6 @@ __pycache__/
 .pytest_cache/
 flask_session/
 .DS_Store
+
+# Original spoken brief for the scaffold; kept locally, not published.
+ellipsis.md
